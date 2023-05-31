@@ -1,0 +1,37 @@
+# Ignore IntelliJ IDEA files
+.idea/
+
+# Ignore Gradle build files
+.gradle/
+/build/
+
+# Ignore Android Studio captures directory
+/captures/
+
+# Ignore macOS-specific files
+.DS_Store
+
+# Ignore APK files
+/app/classic/release/
+/app/material/release/
+
+#remove unwanted builds
+/app/build/
+
+# Ignore Android Studio project files
+*.iml
+/local.properties
+
+# Ignore miscellaneous files
+/.gradle/buildOutputCleanup/
+/.gradle/8.0/checksums/
+/.gradle/8.0/dependencies-accessors/
+/.gradle/8.0/executionHistory/
+/.gradle/file-system.probe
+/.gradle/8.0/fileHashes/
+/.gradle/8.0/gc.properties
+/.gradle/vcs-1/gc.properties
+/output-metadata.json
+
+# Ignore Git-related files
+.vcs.xml

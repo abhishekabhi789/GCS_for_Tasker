@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">GCS for Tasker</string>
+
+    <string name="io_out_raw_value_label">Raw Value</string>
+    <string name="io_out_raw_value_description">Raw QR data scanned</string>
+    <string name="io_out_code_type_label">Code Type</string>
+    <string name="io_out_code_type_description">Type of the QR code</string>
+
+    <string name="io_in_value_filter_label">Value Filter</string>
+    <string name="io_in_value_filter_description">Value Filter for event</string>
+    <string name="io_in_type_filter_label">Type Filter</string>
+    <string name="io_in_type_filter_description">Type Filter for event</string>
+    <string name="io_in_use_regex_button_label">Use Regex Matching</string>
+    <string name="io_in_use_regex_button_description">Matching method for value filter</string>
+
+    <string name="invalid_type_filter">Invalid type filter</string>
+    <string name="invalid_value_filter">Invalid value filter</string>
+    <string name="invalid_value_and_type_filter">Invalid value and type filter</string>
+
+    <string name="value_filter_helper_text">Use simple match or regex rules</string>
+    <string name="value_filter_hint">Enter value filter</string>
+    <string name="type_filter_helper_text">Integers less than 12 separated by comma</string>
+    <string name="type_filter_hint">Enter type filter</string>
+
+    <string name="value_not_valid_error">Please enter valid match pattern or regex</string>
+    <string name="type_not_valid_error">Please enter comma separated integers less than 12</string>
+
+
+    <string name="switch_text_off">Simple</string>
+    <string name="switch_text_on">Regex</string>
+
+    <string name="choose_type_button_description">choose qrcode types easily with search button</string>
+
+    <string name="save_config_button_text">Save</string>
+
+</resources>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".ActivityConfigScanEvent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/valueFilterLayout"
+        style="@style/textInputStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/value_filter_hint"
+        app:helperText="Simple match pattern or Regex"
+        app:layout_constraintEnd_toStartOf="@id/useRegexSwitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/valueFilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:minLines="1"
+            android:textSize="@dimen/main_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/regexSwitchStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/useRegexSwitch"
+        app:layout_constraintEnd_toEndOf="@id/useRegexSwitch"
+        app:layout_constraintTop_toTopOf="@id/valueFilterLayout"
+        tools:text="Matching" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/useRegexSwitch"
+        style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="4dp"
+        android:textAlignment="center"
+        android:textSize="@dimen/main_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/regexSwitchStatus" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/typeFilterLayout"
+        style="@style/textInputStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:hint="@string/type_filter_hint"
+        app:helperText="Integers less than 12 separated by comma"
+        app:layout_constraintEnd_toEndOf="@id/valueFilterLayout"
+        app:layout_constraintStart_toStartOf="@id/valueFilterLayout"
+        app:layout_constraintTop_toBottomOf="@id/valueFilterLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeFilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="phone"
+            android:textSize="@dimen/main_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chooseTypesImageButton"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/choose_type_button_description"
+        app:icon="@drawable/ic_select"
+        app:layout_constraintBottom_toBottomOf="@id/typeFilterLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/typeFilterLayout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveConfigButton"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="@string/save_config_button_text"
+        android:textColor="@color/yellow_light"
+        android:textSize="@dimen/main_text_size"
+        app:boxCornerRadiusBottomEnd="@dimen/boxCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/boxCornerRadius"
+        app:boxCornerRadiusTopEnd="@dimen/boxCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/boxCornerRadius"
+        app:icon="@drawable/ic_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/typeFilterLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

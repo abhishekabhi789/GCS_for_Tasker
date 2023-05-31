@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.abhi.gcsfortasker'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.abhi.gcsfortasker"
+        minSdk 21
+        targetSdk 33
+        versionCode 3
+        versionName "0.4.12"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    flavorDimensions 'themes'
+    productFlavors {
+        material {
+            dimension 'themes'
+            versionNameSuffix '-material'
+        }
+        classic {
+            dimension 'themes'
+            versionNameSuffix '-classic'
+
+        }
+    }
+    sourceSets {
+        classic {
+            java.srcDirs 'src/classic/java'
+            res.srcDirs 'src/classic/res'
+            manifest.srcFile 'src/classic/AndroidManifest.xml'
+        }
+        material {
+            java.srcDirs 'src/material/java'
+            res.srcDirs 'src/material/res'
+            manifest.srcFile 'src/material/AndroidManifest.xml'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def appName = "GCS4Tasker"
+            def versionName = variant.versionName
+            def versionNameSuffix = "beta"
+            outputFileName = "${appName}_v${versionName}_${versionNameSuffix}.apk"
+        }
+    }
+}
+
+dependencies {
+    //code scanner - unbundled
+    implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
+    //tasker plugin
+    implementation 'com.joaomgcd:taskerpluginlibrary:0.4.7'
+    /*//test module availability
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.1.0'
+     */
+    //coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    //for testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    //material theming
+    materialImplementation 'com.google.android.material:material:1.9.0'
+    materialImplementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+}
