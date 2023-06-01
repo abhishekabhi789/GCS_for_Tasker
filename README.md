@@ -1,6 +1,7 @@
-  <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
-
-
+  <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=for-the-badge"/></a> 
+  <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge"></a>
+  <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases"><img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge"></a>
+  
 <h1 style="display: flex; align-items: center;">
   <img src="/app/src/main/res/mipmap-hdpi/ic_launcher.png" alt="App Icon" style="width: 1em; height: 1em;">
   GCS for Tasker
@@ -60,7 +61,7 @@ After completing the Tasker setup, try to perform a scan.
   device.
 
 - #### Why does this app use the Google Code Scanner?
-	>- Easy to Impliment and use.
+	>- Easy to Implement and use.
 	>- It can scan QR codes quickly.
 	>- Scans damaged or distorted QR codes accurately.
 	>- Supports a variety of QR code formats.
@@ -101,7 +102,7 @@ After completing the Tasker setup, try to perform a scan.
 - #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
   > This means the device doesn't have the scanner modules, and Google Play Service will try to
   download the module. Allow some time and ensure network connectivity to complete the download. The
-  download task is hidden and handled by Google Play Services. If the issue persists, check [network troubleshooting](#-Scanner-module-not-downloading).
+  download task is hidden and handled by Google Play Services. If the issue persists, check [Scanner module not downloading](#scanner-module-not-downloading).
 
 - #### Code Scanned but no response from Tasker.
   >- Try a different code to make sure the tasker setup is correct.
