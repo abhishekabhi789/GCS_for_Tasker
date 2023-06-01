@@ -74,7 +74,7 @@ After completing the Tasker setup, try to perform a scan.
  >- Easy to Implement and use.
  >- It can scan QR codes quickly.
  >- Scans damaged or distorted QR codes accurately.
-  >- Supports a variety of QR code formats.
+ >- Supports a variety of QR code formats.
 
  #### Does the app require an internet connection to function?
   > This app does not require an internet connection since the scanner library is capable of working
@@ -92,7 +92,7 @@ After completing the Tasker setup, try to perform a scan.
   
 </details>
 <details><summary>
-	
+
 ## :wrench: Troubleshoot
 </summary>
 
