@@ -1,10 +1,16 @@
-  <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
+<div align="center">
+<h1 align="center">GCS for Tasker</h1>
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="" style="margin-bottom: 20px;"><br>
+<a href="https://developer.android.com/tools/releases/platforms#5.0">
+<img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=for-the-badge"></a>  
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/abhishekabhi789/GCS_for_Tasker?style=for-the-badge">
+<img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/abhishekabhi789/GCS_for_Tasker?style=for-the-badge">
+<a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases">
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge"></a>
+<a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases/latest">
+<img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge"></a>
+</div>
 
-
-<h1 style="display: flex; align-items: center;">
-  <img src="/app/src/main/res/mipmap-hdpi/ic_launcher.png" alt="App Icon" style="width: 1em; height: 1em;">
-  GCS for Tasker
-</h1> 
 GCS for Tasker is an Android application that can act as both a Tasker event plugin and action
 plugin. This app uses the Google Code Scanner API to scan and extract information from QR codes.
 
@@ -20,8 +26,13 @@ this API level or above. Furthermore, it is necessary to have the Google Play Se
 With the GCS for Tasker app, you can easily integrate QR code scanning into your Tasker projects.
 This app supports both scanning events and actions. This app doesn't ask for camera permissions, nor
 does it store or share any data except with Tasker.
+
+## :dna: Variants
+
+There are two variants available for this project based on the theme used in event configuration activity. Classic themed app is smaller in size and material themed app is around 4 times bigger. Both are having same package name and are signed with same key, you can switch them anytime. It's recommended to clear the app data after such switching to release space consumed by previous variant.
+
 <details><summary>
-	
+
 ## :hammer_and_wrench: How to Setup
 </summary>
 Install this plugin app and Tasker.
@@ -55,26 +66,26 @@ After completing the Tasker setup, try to perform a scan.
 ## :question: FAQ
 </summary>
 
-- #### Can this be used on a device that does not have Google Play Services?
+ #### Can this be used on a device that does not have Google Play Services?
   > No, the app uses the unbundled Google code scanner API provided by Google Play Services on the
   device.
 
-- #### Why does this app use the Google Code Scanner?
-	>- Easy to Impliment and use.
-	>- It can scan QR codes quickly.
-	>- Scans damaged or distorted QR codes accurately.
-	>- Supports a variety of QR code formats.
+ #### Why does this app use the Google Code Scanner?
+ >- Easy to Implement and use.
+ >- It can scan QR codes quickly.
+ >- Scans damaged or distorted QR codes accurately.
+  >- Supports a variety of QR code formats.
 
-- #### Does the app require an internet connection to function?
+ #### Does the app require an internet connection to function?
   > This app does not require an internet connection since the scanner library is capable of working
   offline. However, Google Play Services requires an internet connection to download QR scanner
   libraries if they are not already present on your device.
 
-- #### Sometimes the app closes with a toast message saying "Scanning Failed"!
+ #### Sometimes the app closes with a toast message saying "Scanning Failed"!
   > The reason for this is unknown to us, but in most cases it can be fixed by clearing the data of
   Google Play Services (Attention!: Use caution when deleting). We are trying to fix this issue.
 
-- #### Does clearing app data delete any setup or data?
+ #### Does clearing app data delete any setup or data?
   > All configuration data is stored in Tasker and the scanner library is in google play services,
   so by clearing the app data of this app will not make any problem. However, if you want to save
   the scan results, you have to set up a Tasker task to do so.
@@ -85,10 +96,15 @@ After completing the Tasker setup, try to perform a scan.
 ## :wrench: Troubleshoot
 </summary>
 
-- #### Sometimes back button closes the scanner but again opens it without closing the app.
+ #### Sometimes back button closes the scanner but again opens it without closing the app.
   > It's a know bug. It'll be fixed soon once the scanner code is optimized. Press home button to exit from the loop.
 
-- #### Scanner module not downloading.
+ #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
+  > This means the device doesn't have the scanner modules, and Google Play Service will try to
+  download the module. Allow some time and ensure network connectivity to complete the download. The
+  download task is hidden and handled by Google Play Services. If the issue persists, check [Scanner module not downloading](#scanner-module-not-downloading).
+
+ #### Scanner module not downloading.
   >- Ensure internet connection.
   >- Ensure battery saver is turned off.
   >- Update play service if available.
@@ -98,12 +114,7 @@ After completing the Tasker setup, try to perform a scan.
   >- clearing the data of Google Play Services (Attention!: Use caution when deleting)
   >- Upgrade or downgrade Google Play Services.
 
-- #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
-  > This means the device doesn't have the scanner modules, and Google Play Service will try to
-  download the module. Allow some time and ensure network connectivity to complete the download. The
-  download task is hidden and handled by Google Play Services. If the issue persists, check [network troubleshooting](#-Scanner-module-not-downloading).
-
-- #### Code Scanned but no response from Tasker.
+ #### Code Scanned but no response from Tasker.
   >- Try a different code to make sure the tasker setup is correct.
   >- Check Tasker run log.
   >- Try both event and action.
@@ -113,7 +124,7 @@ After completing the Tasker setup, try to perform a scan.
   > **Warning** 
   > Careful with posting qr images and other data as they may contain personal data.
   
-- #### Toast message saying "Scanning failed"
+ #### Toast message saying "Scanning failed"
   > Probably due to bugs with scanner module.
   Try
   >- Clearing the data of Google Play Services.
