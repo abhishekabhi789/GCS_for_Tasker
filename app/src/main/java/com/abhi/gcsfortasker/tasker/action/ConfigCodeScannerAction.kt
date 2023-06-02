@@ -3,6 +3,7 @@ package com.abhi.gcsfortasker.tasker.action
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
+import com.abhi.gcsfortasker.R
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfigHelperNoInput
@@ -14,7 +15,7 @@ class CodeScannerActionHelper(config: TaskerPluginConfig<Unit>) :
     override val outputClass: Class<CodeOutput> get() = CodeOutput::class.java
     override val runnerClass: Class<RunnerCodeScannerAction> get() = RunnerCodeScannerAction::class.java
     override fun addToStringBlurb(input: TaskerInput<Unit>, blurbBuilder: StringBuilder) {
-        blurbBuilder.append("Configuration Saved.")
+        blurbBuilder.append(context.getString(R.string.configuration_saved))
     }
 }
 
@@ -23,7 +24,7 @@ class ActivityConfigScanAction : Activity(), TaskerPluginConfigNoInput {
     private val taskerHelper by lazy { CodeScannerActionHelper(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(context, "Configuration Saved!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,R.string.configuration_saved, Toast.LENGTH_SHORT).show()
         taskerHelper.finishForTasker()
     }
 }

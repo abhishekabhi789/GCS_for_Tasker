@@ -1,24 +1,29 @@
 <div align="center">
+<a href="#">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/ic_launcher_dark.png">
+  <img alt="" src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+</picture></a><br>
 <h1 align="center">GCS for Tasker</h1>
-<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="" style="margin-bottom: 20px;"><br>
 <a href="https://developer.android.com/tools/releases/platforms#5.0">
-<img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=for-the-badge"></a>  
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/abhishekabhi789/GCS_for_Tasker?style=for-the-badge">
-<img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/abhishekabhi789/GCS_for_Tasker?style=for-the-badge">
+<img alt="API 21+" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=for-the-badge" title="Android 5.0 Lollipop"></a>  
+<a href="#"><img alt="" src="https://img.shields.io/github/languages/top/abhishekabhi789/GCS_for_Tasker?color=magenta&style=for-the-badge">
+<img alt="" src="https://img.shields.io/tokei/lines/github/abhishekabhi789/GCS_for_Tasker?style=for-the-badge&color=26C6DA"></a>
 <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases">
-<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge"></a>
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge&color=FFA000"></a>
 <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases/latest">
-<img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge"></a>
+<img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge&color=F44336"></a>
 </div>
 
 GCS for Tasker is an Android application that can act as both a Tasker event plugin and action
 plugin. This app uses the Google Code Scanner API to scan and extract information from QR codes.
 
+
 ## :gear: Requirements
 
 This is a [Tasker Plugin](https://tasker.joaoapps.com/plugins-intro.html), and it requires
 the [Tasker](https://joaoapps.com/tasker/) Android app to function. To use this app, you must have
-an Android device with an API level of 21 or higher, as the Code Scanner API works on devices with
+an Android device with an API level of [21](## "Android 5.0 Lollipop") or higher, as the Code Scanner API works on devices with
 this API level or above. Furthermore, it is necessary to have the Google Play Services installed on the device.
 
 ## :bulb: Features
@@ -29,7 +34,7 @@ does it store or share any data except with Tasker.
 
 ## :dna: Variants
 
-There are two variants available for this project based on the theme used in event configuration activity. Classic themed app is smaller in size and material themed app is around 4 times bigger. Both are having same package name and are signed with same key, you can switch them anytime. It's recommended to clear the app data after such switching to release space consumed by previous variant.
+There are [two variants](/blob/3586d091fa9637212c57e6ddefbe0d12171c633b/app/build.gradle?#L37-L47) available for this project based on the theme used in event configuration activity. Classic themed app is smaller in size and material themed app is around 4 times bigger. Both are having same package name and are signed with same key, you can switch them anytime. It's recommended to clear the app data after such switching to release space consumed by previous variant.
 
 <details><summary>
 

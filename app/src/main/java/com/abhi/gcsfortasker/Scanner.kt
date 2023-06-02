@@ -36,7 +36,7 @@ class CodeScanner(private val context: Context) {
         }
     */
 
-    /**Performs scan and returns the scan result as a triad consisting of the scan result code, the scan result value (or an error message if applicable), and the result value type*/
+    /**Performs scan and returns the scan result as a Pair of the scan result code and  Barcode object or error message string*/
     fun scanNow(): Pair<Int, Any> {
         val semaphore = Semaphore(0)
         val scanner = GmsBarcodeScanning.getClient(context)

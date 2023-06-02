@@ -5,7 +5,7 @@ import android.content.Context
 fun validateInput(
     context: Context, valueFilter: String?, typeFilter: String
 ): Pair<Boolean, String> {
-    val valueValid = true //no need to verify
+    val valueValid = true //stub
     val typeValid = if (typeFilter.isEmpty()) true else run {
         val filterArray = typeFilter.split(",").map { it.replace(" ", "").trim().toIntOrNull() }
         filterArray.all { it in 0..12 } && filterArray.distinct().size < 13

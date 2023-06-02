@@ -13,6 +13,7 @@ import java.util.Arrays
 /**This alert dialog shows a multiple choice list of QR code types and add selected codes to the type filter input field */
 fun showTypeDialog(context: Context, selectedIndex: IntArray?, onSelected: (IntArray) -> Unit) {
     // TODO: replace this
+
     val listItems = arrayOf(
         "TYPE_UNKNOWN",
         "TYPE_CONTACT_INFO",
@@ -34,14 +35,14 @@ fun showTypeDialog(context: Context, selectedIndex: IntArray?, onSelected: (IntA
     }
 
     val builder = AlertDialog.Builder(context)
-    builder.setTitle("Choose Types")
+    builder.setTitle(context.getString(R.string.choose_code_type_dialog_title))
     builder.setIcon(R.mipmap.ic_launcher)
 
     builder.setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
         checkedItems[which] = isChecked
     }
 
-    builder.setPositiveButton("Done") { dialog, which ->
+    builder.setPositiveButton(android.R.string.ok) { dialog, which ->
         val selectedIndices = checkedItems
             .mapIndexed { index, checked -> if (checked) index else null }
             .filterNotNull()
@@ -49,8 +50,8 @@ fun showTypeDialog(context: Context, selectedIndex: IntArray?, onSelected: (IntA
         onSelected(selectedIndices)
     }
 
-    builder.setNegativeButton("CANCEL") { dialog, which -> }
-    builder.setNeutralButton("CLEAR ALL") { dialog: DialogInterface?, which: Int ->
+    builder.setNegativeButton(android.R.string.cancel) { dialog, which -> }
+    builder.setNeutralButton(R.string.clear) { dialog: DialogInterface?, which: Int ->
         Arrays.fill(checkedItems, false)
         onSelected(IntArray(0))
     }
@@ -89,7 +90,7 @@ fun saveInput(activity: Activity, taskerHelper: CodeScannedEventHelper) {
 
     if (isValid && taskerHelper.onBackPressed().success) {
         taskerHelper.finishForTasker()
-        Toast.makeText(activity, "Configuration Saved", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, R.string.configuration_saved, Toast.LENGTH_SHORT).show()
     } else Toast.makeText(activity, "Error: $reason", Toast.LENGTH_SHORT).show()
 }
 

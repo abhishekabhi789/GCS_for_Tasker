@@ -11,16 +11,16 @@ android {
         applicationId "com.abhi.gcsfortasker"
         minSdk 21
         targetSdk 33
-        versionCode 3
-        versionName "0.4.12"
+        versionCode 4
+        versionName "0.4.13"
     }
 
     buildTypes {
-        debug {
+       /* debug {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        }*/
         release {
             minifyEnabled true
             shrinkResources true

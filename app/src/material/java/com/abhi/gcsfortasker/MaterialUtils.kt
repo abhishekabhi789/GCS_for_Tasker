@@ -12,7 +12,8 @@ fun validateInput(
 
     val typeValid = if (typeFilter.isEmpty()) true else run {
         val filterArray = typeFilter.split(",").map { it.replace(" ", "").trim().toIntOrNull() }
-        filterArray.all { it in 0..12 } && filterArray.distinct().size < 13
+        //type constants are in 0-12 range.
+        filterArray.all { it in 0..12 } //&& filterArray.distinct().size < 13
     }
 
     val valueLayout = activity.findViewById<TextInputLayout>(R.id.valueFilterLayout)
