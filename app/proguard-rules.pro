@@ -26,4 +26,4 @@
 #-keep class com.google.android.gms.tflite.java.TfLite
 #-keep class com.google.mlkit.vision.barcode.** { *; }
 #-keep class com.google.mlkit.vision.codescanner.** { *; }
-#-dontobfuscate
+-dontobfuscate

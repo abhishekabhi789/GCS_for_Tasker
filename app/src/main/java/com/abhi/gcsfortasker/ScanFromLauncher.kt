@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.abhi.gcsfortasker.tasker.CodeOutput
+import com.abhi.gcsfortasker.tasker.event.triggerTaskerEvent
 import com.google.mlkit.vision.barcode.common.Barcode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,12 +23,8 @@ class ScanFromLauncher : Activity() {
         super.onCreate(savedInstanceState)
         val context = this
         val scanner = CodeScanner(this)
-        //check for scanner modules.
-        // val hasModules = scanner.hasScannerModule()
-        Log.d(TAG, "scanner may be present, continuing the main code.")
         coroutineScope.launch(Dispatchers.IO) {
             val (id, output) = scanner.scanNow()
-//            Log.d("GCS4T: SFL - oC", "id: $id, value: $value, type: $type")
             withContext(Dispatchers.Main) {
                 when (id) {
                     1 -> {

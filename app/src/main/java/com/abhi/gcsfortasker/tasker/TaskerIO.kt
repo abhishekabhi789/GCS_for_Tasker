@@ -1,5 +1,6 @@
 package com.abhi.gcsfortasker.tasker
 
+import com.abhi.gcsfortasker.R
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInputField
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInputRoot
 import com.joaomgcd.taskerpluginlibrary.output.TaskerOutputObject
@@ -16,7 +17,7 @@ class CodeInputFilter @JvmOverloads constructor(
 @TaskerInputRoot
 @TaskerOutputObject()
 class CodeOutput @JvmOverloads constructor(
-    @field:TaskerInputField("gcs_rawvalue") @get:TaskerOutputVariable("gcs_value_raw") var codeValue: String? = null,
-    @field:TaskerInputField("gcs_codetype") @get:TaskerOutputVariable("gcs_code_type") var codeType: String? = null,
-    @field:TaskerInputField("gcs_displayvalue") @get:TaskerOutputVariable("gcs_value_display") var displayValue: String? = null
-    )
+    @field:TaskerInputField("gcs_rawvalue") @get:TaskerOutputVariable("gcs_value_raw", R.string.io_out_raw_value_label,R.string.io_out_raw_value_description) var codeValue: String? = null,
+    @field:TaskerInputField("gcs_codetype") @get:TaskerOutputVariable("gcs_code_type",R.string.io_out_code_type_label,R.string.io_out_code_type_description) var codeType: String? = null,
+    @field:TaskerInputField("gcs_displayvalue") @get:TaskerOutputVariable("gcs_value_display",R.string.io_out_display_value_label,R.string.io_out_display_value_description) var displayValue: String? = null
+)

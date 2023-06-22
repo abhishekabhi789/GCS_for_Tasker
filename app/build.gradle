@@ -11,16 +11,16 @@ android {
         applicationId "com.abhi.gcsfortasker"
         minSdk 21
         targetSdk 33
-        versionCode 4
-        versionName "0.4.13"
+        versionCode 5
+        versionName "0.5.0"
     }
 
     buildTypes {
-       /* debug {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }*/
+        /* debug {
+             minifyEnabled true
+             shrinkResources true
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }*/
         release {
             minifyEnabled true
             shrinkResources true
@@ -30,6 +30,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -63,8 +66,7 @@ android {
         variant.outputs.all {
             def appName = "GCS4Tasker"
             def versionName = variant.versionName
-            def versionNameSuffix = "beta"
-            outputFileName = "${appName}_v${versionName}_${versionNameSuffix}.apk"
+            outputFileName = "${appName}_v${versionName}.apk"
         }
     }
 }
@@ -74,10 +76,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
     //tasker plugin
     implementation 'com.joaomgcd:taskerpluginlibrary:0.4.7'
-    /*//test module availability
-    implementation 'com.google.android.gms:play-services-base:18.2.0'
-    implementation 'com.google.android.gms:play-services-tflite-java:16.1.0'
-     */
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'

@@ -15,8 +15,6 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
     private val TAG = "RunnerCodeScannerAction"
     override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
         val scanner = CodeScanner(context)
-        //check for scanner modules.
-        //scanner.hasScannerModule()
         val (id, output) = scanner.scanNow()
 
         return if (id == 1) {

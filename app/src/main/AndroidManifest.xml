@@ -34,17 +34,17 @@
             android:name=".tasker.action.ActivityConfigScanAction"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="Scan Action Configuration"
+            android:label="Scan Action"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityConfigScanEvent"
+            android:name=".tasker.event.ActivityConfigScanEvent"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="Scan Event Configuration" >
+            android:label="Scan Event" >
             <intent-filter>
                 <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
             </intent-filter>

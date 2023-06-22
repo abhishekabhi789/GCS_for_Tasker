@@ -5,43 +5,16 @@ import android.util.Log
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import java.util.concurrent.Semaphore
 
-/**This class has two functions. hasScannerModule to check scanner module availability and [scanNow] to start scanning*/
+/**Call scanNow() to start scan*/
 class CodeScanner(private val context: Context) {
     private val TAG = "CodeScanner"
-    /**Ensuring API availability with ModuleInstallClient [https://developers.google.com/android/guides/module-install-apis]*/
-    /*
-        fun hasScannerModule() {
-            Log.d("GCS4T:CS-hSC:hasScanner", "Looking for GCS modules")
-            val moduleInstallClient = ModuleInstall.getClient(context)
-            val optionalModuleApi = TfLite.getClient(context)
-            moduleInstallClient.areModulesAvailable(optionalModuleApi).addOnSuccessListener {
-                if (it.areModulesAvailable()) {
-                    // Modules are present on the device...
-                    Log.d("GCS4T:CS-hSC:checkMod", "GCS modules present")
-
-                } else {
-                    // Modules are not present on the device...
-                    Log.e("GCS4T:CS-hSC:checkMod", "GCS modules absent")
-                    Toast.makeText(
-                        context,
-                        "GCS Modules absent. Allow some time to complete the download",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-
-                }
-            }.addOnFailureListener {
-                Log.e("GCS4T:CS-hSC:failed", "Failed to check for GCS module")
-            }
-        }
-    */
 
     /**Performs scan and returns the scan result as a Pair of the scan result code and  Barcode object or error message string*/
     fun scanNow(): Pair<Int, Any> {
         val semaphore = Semaphore(0)
         val scanner = GmsBarcodeScanning.getClient(context)
-        //initialising the result variable with error message
-        var result: Pair<Int, Any> = Pair(5, "Scan did not complete")
+        //initialising the result variable
+        var result: Pair<Int, Any> = Pair(5, "Scanner prepared, waiting for result")
 
         scanner.startScan().addOnSuccessListener { qrCode ->
             if (qrCode.rawValue!!.isNotEmpty()) {
@@ -57,14 +30,14 @@ class CodeScanner(private val context: Context) {
             Log.d(TAG, "scanNow: Scan Cancelled")
             semaphore.release()
         }.addOnFailureListener { e ->
-            result = Pair(3, e.message ?: "")
+            result = Pair(3, e.message ?: "Unknown error")
             Log.e(
                 TAG,
                 "scanNow: failed to scan. message: ${e.message}, cause: ${e.cause}, stacktrace: ${e.stackTraceToString()}",
             )
             semaphore.release()
         }
-        Log.d(TAG, "scanNow: Scanning Completed")
+        Log.d(TAG, "scanNow: ${result.first} : ${result.second}")
         semaphore.acquire()
         return result
     }
