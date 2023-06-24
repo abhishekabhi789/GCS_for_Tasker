@@ -96,8 +96,8 @@ After completing the Tasker setup, try to perform a scan.
 ## :wrench: Troubleshoot
 </summary>
 
- #### Sometimes back button closes the scanner but again opens it without closing the app.
-  > It's a know bug. It'll be fixed soon once the scanner code is optimized. Press home button to exit from the loop.
+ <!-- Fixed with the commit https://github.com/abhishekabhi789/GCS_for_Tasker/commit/f1f6c2b15b07d8c5a62e003fceaa387b34a8423a #### Sometimes back button closes the scanner but again opens it without closing the app.
+  > It's a know bug. It'll be fixed soon once the scanner code is optimized. Press home button to exit from the loop. -->
 
  #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
   > This means the device doesn't have the scanner modules, and Google Play Service will try to
