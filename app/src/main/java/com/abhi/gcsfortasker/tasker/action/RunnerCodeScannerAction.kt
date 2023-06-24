@@ -10,28 +10,43 @@ import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResult
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultErrorWithOutput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultSucess
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import java.util.concurrent.TimeoutException
 
 class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
     private val TAG = "RunnerCodeScannerAction"
     override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
-        val scanner = CodeScanner(context)
-        val (id, output) = scanner.scanNow()
+        val scanner = CodeScanner()
+        val deferred = CompletableDeferred<Pair<Int, Any>>()
+        scanner.scanNow(context) { result ->
+            deferred.complete(result)
+        }
 
-        return if (id == 1) {
-            val qrcode = output as Barcode
+        var id = -1
+        var output: Any? = null
+        try {
+            val result = runBlocking { withTimeout(10_000L) { deferred.await() } }
+            id = result.first
+            output = result.second
+        } catch (e: TimeoutException) {
+            Log.d(TAG, "run: timedOut. ${e.message} | ${e.cause}")
+        }
+
+        return if (id == 1 && output is Barcode) {
+            val qrcode = output
             Log.d(
                 TAG,
-                "runner received data. id: $id, value: ${qrcode.rawValue}, type: ${qrcode.valueType}, display value: ${qrcode.displayValue}"
+                "runner received data. id: $id, value: ${qrcode.rawValue}, type: ${qrcode.valueType}"
             )
             TaskerPluginResultSucess(
                 CodeOutput(
-                    qrcode.rawValue,
-                    qrcode.valueType.toString(),
-                    qrcode.displayValue
+                    qrcode.rawValue, qrcode.valueType.toString(), qrcode.displayValue
                 )
             )
         } else {
-            val message = output as String
+            val message = output?.toString() ?: "Unknown error"
             Log.e(TAG, "run: id: $id, output: $message")
             TaskerPluginResultErrorWithOutput(id, message)
         }
