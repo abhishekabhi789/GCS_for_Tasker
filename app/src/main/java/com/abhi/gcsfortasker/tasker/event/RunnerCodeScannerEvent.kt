@@ -22,7 +22,7 @@ class RunnerCodeScannerEvent :
         val valueFilter = input.regular.valueFilter
         val typeFilter = input.regular.typeFilter
 
-        Log.d("GCS4T:EventRunner", "eventValue: ${update?.codeValue} | eventType: ${update?.codeType}")
+        Log.d("GCS4T:EventRunner", "eventValue: ${update?.rawValue} | eventType: ${update?.codeType}")
         Log.d("GCS4T:EventRunner", "valueFilter: $valueFilter | typeFilter: $typeFilter")
         //if value filter is null, no rule for value filter, else match update data with value filter rule
         val valueMatch = if (valueFilter == null) {
@@ -30,7 +30,7 @@ class RunnerCodeScannerEvent :
         } else {
             //check if the code value from event update matches the filter rules
             InputMatching().matchStrings(
-                update?.codeValue.toString(),
+                update?.rawValue.toString(),
                 valueFilter.toString(),
                 input.regular.useRegex
             )

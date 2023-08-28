@@ -5,13 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import com.abhi.gcsfortasker.R
+import com.abhi.gcsfortasker.barcodeTypes
 import com.abhi.gcsfortasker.chooseTypes
 import com.abhi.gcsfortasker.databinding.EventConfigInputBinding
 import com.abhi.gcsfortasker.saveInput
 import com.abhi.gcsfortasker.tasker.CodeInputFilter
-import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
-import com.joaomgcd.taskerpluginlibrary.extensions.requestQuery
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 
 class ActivityConfigScanEvent : Activity(), TaskerPluginConfig<CodeInputFilter> {
@@ -46,6 +45,7 @@ class ActivityConfigScanEvent : Activity(), TaskerPluginConfig<CodeInputFilter> 
         binding = EventConfigInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
         taskerHelper.onCreate()
+        binding.codeTypesList.text = barcodeTypes.joinToString(",")
         binding.useRegexSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.regexSwitchStatus.text =
                 if (isChecked) getString(R.string.switch_text_on) else getString(R.string.switch_text_off)
@@ -67,6 +67,3 @@ class ActivityConfigScanEvent : Activity(), TaskerPluginConfig<CodeInputFilter> 
     }
 }
 
-fun Context.triggerTaskerEvent(output: CodeOutput) {
-    ActivityConfigScanEvent::class.java.requestQuery(this, output)
-}

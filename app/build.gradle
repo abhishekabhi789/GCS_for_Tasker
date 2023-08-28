@@ -12,7 +12,7 @@ android {
         minSdk 21
         targetSdk 33
         versionCode 5
-        versionName "0.5.1"
+        versionName "0.5.2"
     }
 
     buildTypes {
@@ -37,7 +37,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    flavorDimensions 'themes'
+    flavorDimensions.add('themes')
     productFlavors {
         material {
             dimension 'themes'
@@ -62,8 +62,8 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all {
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
             def appName = "GCS4Tasker"
             def versionName = variant.versionName
             outputFileName = "${appName}_v${versionName}.apk"
@@ -73,14 +73,15 @@ android {
 
 dependencies {
     //code scanner - unbundled
-    implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
+    implementation 'com.google.android.gms:play-services-code-scanner:16.1.0'
     //tasker plugin
     implementation 'com.joaomgcd:taskerpluginlibrary:0.4.7'
     //coroutine
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    implementation 'com.google.mlkit:barcode-scanning-common:17.0.0'
     //for testing
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
     //material theming
     materialImplementation 'com.google.android.material:material:1.9.0'
     materialImplementation 'androidx.constraintlayout:constraintlayout:2.1.4'

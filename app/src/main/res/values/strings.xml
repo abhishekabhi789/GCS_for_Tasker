@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">GCS for Tasker</string>
 <!--    Output variables-->
     <string name="io_out_raw_value_label">Raw Value</string>
@@ -25,8 +25,8 @@
     <string name="type_filter_helper_text">Integers less than 12 separated by comma</string>
     <string name="type_filter_hint">Enter type filter</string>
 <!--    Text input error messages-->
-    <string name="value_not_valid_error">Please enter valid match pattern or regex</string>
-    <string name="type_not_valid_error">Please enter comma separated integers less than 12</string>
+    <string name="value_not_valid_error">Enter valid match pattern or regex</string>
+    <string name="type_not_valid_error">Enter correct values, use the search button for help</string>
 <!--    Regex switch status-->
     <string name="switch_text_off">Simple</string>
     <string name="switch_text_on">Regex</string>
@@ -38,5 +38,6 @@
 <!--    Save configuration-->
     <string name="save_config_button_text">Save</string>
     <string name="configuration_saved">Configuration Saved.</string>
+    <string name="code_types_list_title">These are the code types</string>
 
 </resources>

@@ -7,8 +7,8 @@ fun validateInput(
 ): Pair<Boolean, String> {
     val valueValid = true //stub
     val typeValid = if (typeFilter.isEmpty()) true else run {
-        val filterArray = typeFilter.split(",").map { it.replace(" ", "").trim().toIntOrNull() }
-        filterArray.all { it in 0..12 } && filterArray.distinct().size < 13
+        val filterArray = typeFilter.split(",").map { it.trim() }
+        filterArray.all { it in barcodeTypes }
     }
 
     return when {

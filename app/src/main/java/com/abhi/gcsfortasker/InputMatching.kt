@@ -58,10 +58,3 @@ class InputMatching {
         return p.isEmpty() && index == length // pattern matches if it's empty and we've consumed all input
     }
 }
-
-
-fun main() {
-    val input = "the quick brown fox"
-    val pattern = "*quick*"
-    println(InputMatching().matchStrings(input, pattern, false))
-}

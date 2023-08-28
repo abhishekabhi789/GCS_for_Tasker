@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/useRegexSwitch"
         app:layout_constraintEnd_toEndOf="@id/useRegexSwitch"
+        app:layout_constraintStart_toStartOf="@id/useRegexSwitch"
         app:layout_constraintTop_toTopOf="@id/valueFilterLayout"
         tools:text="Matching" />
 
@@ -70,7 +70,7 @@
             android:id="@+id/typeFilter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="phone"
+            android:inputType="textMultiLine"
             android:textSize="@dimen/main_text_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,5 +104,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/typeFilterLayout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/code_types_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/code_types_list_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saveConfigButton" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/code_types_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textIsSelectable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_types_list_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

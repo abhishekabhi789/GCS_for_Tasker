@@ -24,7 +24,7 @@ class ActivityConfigScanAction : Activity(), TaskerPluginConfigNoInput {
     private val taskerHelper by lazy { CodeScannerActionHelper(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(context,R.string.configuration_saved, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, R.string.configuration_saved, Toast.LENGTH_SHORT).show()
         taskerHelper.finishForTasker()
     }
 }

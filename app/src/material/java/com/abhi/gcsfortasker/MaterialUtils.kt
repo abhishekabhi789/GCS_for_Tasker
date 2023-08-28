@@ -9,11 +9,9 @@ fun validateInput(
     typeFilter: String
 ): Pair<Boolean, String> {
     val valueValid = true //stub
-
     val typeValid = if (typeFilter.isEmpty()) true else run {
-        val filterArray = typeFilter.split(",").map { it.replace(" ", "").trim().toIntOrNull() }
-        //type constants are in 0-12 range.
-        filterArray.all { it in 0..12 } //&& filterArray.distinct().size < 13
+        val filterArray = typeFilter.split(",").map { it.trim() }
+        filterArray.all { it in barcodeTypes }
     }
 
     val valueLayout = activity.findViewById<TextInputLayout>(R.id.valueFilterLayout)
@@ -30,6 +28,7 @@ fun validateInput(
             false,
             activity.getString(R.string.invalid_value_and_type_filter)
         )
+
         !valueValid -> Pair(false, activity.getString(R.string.invalid_value_filter))
         !typeValid -> Pair(false, activity.getString(R.string.invalid_type_filter))
         else -> Pair(true, "")

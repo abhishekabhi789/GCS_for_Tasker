@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:paddingVertical="8dp"
-            android:trackTint="#FFD740"
             android:thumbTint="#ffb609"
+            android:trackTint="#FFD740"
             tools:checked="false"
             tools:targetApi="m" />
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:fontFamily="monospace"
             android:hint="@string/type_filter_hint"
             android:importantForAutofill="no"
-            android:inputType="phone"
+            android:inputType="textMultiLine"
             android:paddingVertical="8dp" />
 
         <ImageButton
@@ -104,5 +104,17 @@
         android:backgroundTint="#ffb609"
         android:text="@string/save_config_button_text"
         android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/code_types_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/code_types_list_title" />
+
+    <TextView
+        android:id="@+id/code_types_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true" />
 
 </LinearLayout>

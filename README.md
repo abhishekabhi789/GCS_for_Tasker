@@ -7,9 +7,9 @@
 <a href="https://developer.android.com/tools/releases/platforms#5.0">
 <img alt="API 21+" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=for-the-badge&color=FF0800" title="Android 5.0 Lollipop"></a>
 <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases">
-<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge&color=00C853"></a>
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge&color=00C853" title="Total download count"></a>
 <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases/latest">
-<img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge&color=0091EA"></a>
+<img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge&color=0091EA" title="latest release version"></a>
 </div>GCS for Tasker is an Android application that can act as both a Tasker event plugin and action
 plugin. This app uses the Google Code Scanner API to scan and extract information from QR codes.<br>
 
@@ -44,7 +44,7 @@ Install this plugin app and Tasker.
 	
 	* Value filter: The event will trigger only when the raw value of the scanned code matches the value filter. This field supports both simple and regex matching. Adjust the switch next to this field to choose simple matching or regex matching.
 	
-	* Type filter: The event will trigger only when the qr code type matches the type filter. This field takes integers from 0 to 12. Refer [BarcodeValueType](https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeValueType) for information about code type constants. Use the search icon next to this field to easily select code types.
+	* Type filter: The event will trigger only when the qr code type matches the type filter. Refer [BarcodeValueType](https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeValueType) for information about code types. Use the search icon next to this field to easily select code types.
 	
 	If both the value filter and type filter are defined, then the event triggers only if both conditions are satisfied.
 	
@@ -95,9 +95,6 @@ After completing the Tasker setup, try to perform a scan.
 
 ## :wrench: Troubleshoot
 </summary>
-
- <!-- Fixed with the commit https://github.com/abhishekabhi789/GCS_for_Tasker/commit/f1f6c2b15b07d8c5a62e003fceaa387b34a8423a #### Sometimes back button closes the scanner but again opens it without closing the app.
-  > It's a know bug. It'll be fixed soon once the scanner code is optimized. Press home button to exit from the loop. -->
 
  #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
   > This means the device doesn't have the scanner modules, and Google Play Service will try to

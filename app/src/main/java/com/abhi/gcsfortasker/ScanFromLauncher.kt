@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.abhi.gcsfortasker.tasker.CodeOutput
-import com.abhi.gcsfortasker.tasker.event.triggerTaskerEvent
+import com.abhi.gcsfortasker.tasker.event.ActivityConfigScanEvent
 import com.google.mlkit.vision.barcode.common.Barcode
+import com.joaomgcd.taskerpluginlibrary.extensions.requestQuery
 
 /**This activity initiates a scan whenever the plugin app is opened from launcher. It will only trigger an event if a value is successfully detected from the scan.*/
 class ScanFromLauncher : Activity() {
@@ -22,11 +23,12 @@ class ScanFromLauncher : Activity() {
                 1 -> {
                     try {
                         val qrcode = output as Barcode
-                        triggerTaskerEvent(
+                        ActivityConfigScanEvent::class.java.requestQuery(
+                            this,
                             CodeOutput(
                                 qrcode.rawValue,
-                                qrcode.valueType.toString(),
-                                qrcode.displayValue
+                                qrcode.displayValue,
+                                barcodeTypes[qrcode.valueType]
                             )
                         )
                     } catch (e: Exception) {

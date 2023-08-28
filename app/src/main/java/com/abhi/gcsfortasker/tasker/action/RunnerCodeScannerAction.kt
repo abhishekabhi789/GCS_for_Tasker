@@ -3,6 +3,7 @@ package com.abhi.gcsfortasker.tasker.action
 import android.content.Context
 import android.util.Log
 import com.abhi.gcsfortasker.CodeScanner
+import com.abhi.gcsfortasker.barcodeTypes
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.joaomgcd.taskerpluginlibrary.action.TaskerPluginRunnerActionNoInput
@@ -11,6 +12,8 @@ import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResult
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultErrorWithOutput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultSucess
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import java.util.concurrent.TimeoutException
@@ -20,8 +23,10 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
     override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
         val scanner = CodeScanner()
         val deferred = CompletableDeferred<Pair<Int, Any>>()
-        scanner.scanNow(context) { result ->
-            deferred.complete(result)
+        GlobalScope.launch {
+            scanner.scanNow(context) { result ->
+                deferred.complete(result)
+            }
         }
 
         var id = -1
@@ -42,7 +47,9 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
             )
             TaskerPluginResultSucess(
                 CodeOutput(
-                    qrcode.rawValue, qrcode.valueType.toString(), qrcode.displayValue
+                    qrcode.rawValue,
+                    qrcode.displayValue,
+                    barcodeTypes[qrcode.valueType]
                 )
             )
         } else {
