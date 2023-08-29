@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <!-- Permission for plugin -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <!-- Block installation on non camera devices-->
     <uses-feature
         android:name="android.hardware.camera"
@@ -26,7 +27,6 @@
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

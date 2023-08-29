@@ -12,7 +12,7 @@ android {
         minSdk 21
         targetSdk 33
         versionCode 5
-        versionName "0.5.2"
+        versionName "0.5.3"
     }
 
     buildTypes {
@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.joaomgcd:taskerpluginlibrary:0.4.7'
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
-    implementation 'com.google.mlkit:barcode-scanning-common:17.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     //for testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'

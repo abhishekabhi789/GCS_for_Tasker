@@ -1,6 +1,10 @@
 package com.abhi.gcsfortasker.tasker.action
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import android.util.Log
 import com.abhi.gcsfortasker.CodeScanner
 import com.abhi.gcsfortasker.barcodeTypes
@@ -21,6 +25,14 @@ import java.util.concurrent.TimeoutException
 class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
     private val TAG = "RunnerCodeScannerAction"
     override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !Settings.canDrawOverlays(context)) {
+            Log.e(TAG, "run: Permission - SYSTEM_ALERT_WINDOW not granted")
+            requestOverlayPermission(context)
+            return TaskerPluginResultErrorWithOutput(
+                0,
+                "missing_permission: Display over other apps."
+            )
+        }
         val scanner = CodeScanner()
         val deferred = CompletableDeferred<Pair<Int, Any>>()
         GlobalScope.launch {
@@ -56,6 +68,18 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
             val message = output?.toString() ?: "Unknown error"
             Log.e(TAG, "run: id: $id, output: $message")
             TaskerPluginResultErrorWithOutput(id, message)
+        }
+    }
+
+    private fun requestOverlayPermission(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + context.packageName)
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+            Log.d(TAG, "requestOverlayPermission: Permission requested")
         }
     }
 }
