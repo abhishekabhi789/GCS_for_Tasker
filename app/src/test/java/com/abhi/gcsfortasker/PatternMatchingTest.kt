@@ -1,10 +1,11 @@
 package com.abhi.gcsfortasker
 
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 
-class InputMatchingTest {
+class PatternMatchingTest {
     //Testng examples from [https://tasker.joaoapps.com/userguide/en/matching.html]
     @Test
     fun testExamples() {

@@ -7,7 +7,7 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 
 /** Call scanNow() to start scanning */
 class CodeScanner {
-    private val TAG ="GCS4T:Scanner"
+    private val TAG = javaClass.simpleName
 
     /** Performs scan and returns the scan result as a Pair of the scan result code and Barcode object or error message string */
     fun scanNow(context: Context, callback: (Pair<Int, Any>) -> Unit) {

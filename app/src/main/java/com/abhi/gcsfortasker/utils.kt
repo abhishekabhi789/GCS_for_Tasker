@@ -8,8 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.abhi.gcsfortasker.tasker.event.CodeScannedEventHelper
 import java.util.Arrays
-
-/**This alert dialog shows a multiple choice list of QR code types and add selected codes to the type filter input field */
+/**An array of all code types*/
 val barcodeTypes = arrayOf(
     "unknown",
     "contact_info",
@@ -26,12 +25,13 @@ val barcodeTypes = arrayOf(
     "driver_license"
 )
 
-/**Returns an array of all code type names*/
+/**Returns an array of all code types formatted*/
 fun getCodeTypesNames(): Array<String> {
     return barcodeTypes.map { it ->
         it.split("_").joinToString(" ") { it.replaceFirstChar { c: Char -> c.uppercaseChar() } }
     }.toTypedArray()
 }
+/**This alert dialog shows a multiple choice list of QR code types and add selected codes to the type filter input field */
 
 fun showTypeDialog(
     context: Context,

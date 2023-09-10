@@ -10,6 +10,8 @@
 <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/abhishekabhi789/GCS_for_Tasker/total?style=for-the-badge&color=00C853" title="Total download count"></a>
 <a href="https://github.com/abhishekabhi789/GCS_for_Tasker/releases/latest">
 <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/abhishekabhi789/GCS_for_Tasker?include_prereleases&style=for-the-badge&color=0091EA" title="latest release version"></a>
+<img alt="demo project download" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftaskernet.com%2F_ah%2Fapi%2Fdatashare%2Fv1%2Fshares%2FAS35m8mVC%252FNlWH31JCTnGHpKVeZk1osEp8V1pFxCq1Ls28Un1RXCw9ZNWWvmpxOebt4WIYFeiZhZKHc%253D%2FProject%253AGCS4T%2520Example%2520Project%3Fa%3D0&query=%24.info.stats.downloads&prefix=Downloads%3A%20&style=for-the-badge&label=Taskernet&labelColor=yellow&color=grey&link=https%3A%2F%2Ftaskernet.com%2Fshares%2F%3Fuser%3DAS35m8mVC%252FNlWH31JCTnGHpKVeZk1osEp8V1pFxCq1Ls28Un1RXCw9ZNWWvmpxOebt4WIYFeiZhZKHc%253D%26id%3DProject%253AGCS4T%2BExample%2BProject" title="import the demo project from taskernet" >
+
 </div>GCS for Tasker is an Android application that can act as both a Tasker event plugin and action
 plugin. This app uses the Google Code Scanner API to scan and extract information from QR codes.<br>
 
@@ -18,7 +20,7 @@ plugin. This app uses the Google Code Scanner API to scan and extract informatio
 
 This is a [Tasker Plugin](https://tasker.joaoapps.com/plugins-intro.html), and it requires
 the [Tasker](https://joaoapps.com/tasker/) Android app to function. To use this app, you must have
-an Android device with an API level of [21](## "Android 5.0 Lollipop") or higher, as the Code Scanner API works on devices with
+an Android device with an API level of [21](a "Android 5.0 Lollipop") or higher, as the Code Scanner API works on devices with
 this API level or above. Furthermore, it is necessary to have the Google Play Services installed on the device.
 
 ## :bulb: Features
@@ -60,6 +62,7 @@ After completing the Tasker setup, try to perform a scan.
     * This download is a background task and is handled by the Google Play Service. You won't be
       notified when the task is completed.
 
+Here's an example project. Import it from [TaskerNet](https://taskernet.com/shares/?user=AS35m8mVC%2FNlWH31JCTnGHpKVeZk1osEp8V1pFxCq1Ls28Un1RXCw9ZNWWvmpxOebt4WIYFeiZhZKHc%3D&id=Project%3AGCS4T+Example+Project)
 </details>
 <details><summary>
 
