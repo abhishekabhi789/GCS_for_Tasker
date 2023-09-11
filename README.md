@@ -20,7 +20,7 @@ plugin. This app uses the Google Code Scanner API to scan and extract informatio
 
 This is a [Tasker Plugin](https://tasker.joaoapps.com/plugins-intro.html), and it requires
 the [Tasker](https://joaoapps.com/tasker/) Android app to function. To use this app, you must have
-an Android device with an API level of [21](a "Android 5.0 Lollipop") or higher, as the Code Scanner API works on devices with
+an Android device with an API level of [21](https://developer.android.com/tools/releases/platforms#5.0 "Android 5.0 Lollipop") or higher, as the Code Scanner API works on devices with
 this API level or above. Furthermore, it is necessary to have the Google Play Services installed on the device.
 
 ## :bulb: Features
@@ -83,11 +83,7 @@ Here's an example project. Import it from [TaskerNet](https://taskernet.com/shar
   > This app does not require an internet connection since the scanner library is capable of working
   offline. However, Google Play Services requires an internet connection to download QR scanner
   libraries if they are not already present on your device.
-
- #### Sometimes the app closes with a toast message saying "Scanning Failed"!
-  > The reason for this is unknown to us, but in most cases it can be fixed by clearing the data of
-  Google Play Services (Attention!: Use caution when deleting). We are trying to fix this issue.
-
+  
  #### Does clearing app data delete any setup or data?
   > All configuration data is stored in Tasker and the scanner library is in google play services,
   so by clearing the app data of this app will not make any problem. Also, if you want to save
