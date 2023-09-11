@@ -53,7 +53,7 @@
         </activity>
 
         <service
-            android:name=".ScannerForegroundService"
+            android:name=".ScannerService"
             android:enabled="true"
             android:exported="false" />
 

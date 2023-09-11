@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import com.abhi.gcsfortasker.CodeScanner
+import com.abhi.gcsfortasker.ScannerService
 import com.abhi.gcsfortasker.barcodeTypes
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -34,6 +35,8 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
         val scanner = CodeScanner()
         val deferred = CompletableDeferred<Pair<Int, Any>>()
         runBlocking {
+            //stating service before scanning
+            context.startService(Intent(context, ScannerService::class.java))
             scanner.scanNow(context) { result ->
                 deferred.complete(result)
             }
@@ -49,6 +52,8 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
             Log.e(TAG, "run: timedOut. ${e.message} | ${e.cause}")
             Toast.makeText(context, "action timeout", Toast.LENGTH_SHORT).show()
         }
+        //stopping service upon receiving result
+        context.stopService(Intent(context, ScannerService::class.java))
 
         return if (id == 1 && output is Barcode) {
             val qrcode = output
