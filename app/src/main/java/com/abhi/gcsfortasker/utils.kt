@@ -58,7 +58,7 @@ fun showTypeDialog(
         onSelected(selectedTypes)
     }
 
-    builder.setNegativeButton(android.R.string.cancel) { _, which -> }
+    builder.setNegativeButton(android.R.string.cancel) { _, _ -> }
     builder.setNeutralButton(R.string.clear) { _: DialogInterface?, _: Int ->
         Arrays.fill(checkedItems, false)
         onSelected(emptyArray())

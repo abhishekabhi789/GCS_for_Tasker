@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme"  parent="android:Theme.DeviceDefault.DayNight" tools:ignore="NewApi">
+        <!-- controls the switch on colour -->
+        <item name="android:colorPrimary">@color/yellow</item>
+        <item name="android:colorPrimaryDark">@color/yellow_dark</item>
+        <item name="android:colorAccent">@color/yellow</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:statusBarColor">@color/yellow</item>
+        <item name="android:editTextBackground">@color/black_alt</item>
+    </style>
+</resources>

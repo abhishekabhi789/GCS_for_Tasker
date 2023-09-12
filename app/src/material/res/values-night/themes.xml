@@ -1,10 +1,12 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.GCS4T" parent="Theme.Material3.DayNight">
+    <style name="AppTheme" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/yellow_light</item>
         <item name="colorPrimaryVariant">@color/yellow_dark</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="android:textColor">@color/white_alt</item>
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/black_alt</item>
     </style>
 </resources>

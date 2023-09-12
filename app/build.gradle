@@ -11,8 +11,8 @@ android {
         applicationId "com.abhi.gcsfortasker"
         minSdk 21
         targetSdk 33
-        versionCode 55
-        versionName "0.5.5"
+        versionCode 56
+        versionName "0.5.6"
     }
 
     buildTypes {
@@ -53,12 +53,10 @@ android {
         classic {
             java.srcDirs 'src/classic/java'
             res.srcDirs 'src/classic/res'
-            manifest.srcFile 'src/classic/AndroidManifest.xml'
         }
         material {
             java.srcDirs 'src/material/java'
             res.srcDirs 'src/material/res'
-            manifest.srcFile 'src/material/AndroidManifest.xml'
         }
     }
 
@@ -79,6 +77,8 @@ dependencies {
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    //splashscreen
+    implementation "androidx.core:core-splashscreen:1.0.1"
     //for testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'

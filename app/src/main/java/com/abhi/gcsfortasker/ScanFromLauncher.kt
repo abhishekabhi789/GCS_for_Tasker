@@ -16,6 +16,7 @@ class ScanFromLauncher : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        actionBar?.hide()
         val serviceIntent = Intent(this, ScannerService::class.java)
         this.startService(serviceIntent)
         val scanner = CodeScanner()
