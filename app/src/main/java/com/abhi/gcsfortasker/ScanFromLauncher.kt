@@ -23,7 +23,7 @@ class ScanFromLauncher : Activity() {
         scanner.scanNow(this) { result ->
             val (id, output) = result
             when (id) {
-                1 -> {
+                0 -> {
                     try {
                         val qrcode = output as Barcode
                         ActivityConfigScanEvent::class.java.requestQuery(

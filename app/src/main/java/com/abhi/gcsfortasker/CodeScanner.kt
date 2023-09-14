@@ -19,19 +19,36 @@ class CodeScanner {
                     TAG,
                     "scanNow: Success- value: ${qrCode.rawValue}, type: ${qrCode.valueType}"
                 )
-                callback.invoke(Pair(1, qrCode))
+                callback.invoke(Pair(0, qrCode))
 
             }
             .addOnCanceledListener {
                 Log.d(TAG, "scanNow: Scan Cancelled")
-                callback.invoke(Pair(2, "Scan cancelled"))
+                val error = ErrorCodes.SCAN_CANCELLED
+                callback.invoke(Pair(error.code, error.message))
             }
             .addOnFailureListener { e ->
                 Log.e(
                     TAG,
-                    "scanNow: failed to scan. message: ${e.message}, cause: ${e.cause}, stacktrace: ${e.stackTraceToString()}"
+                    buildString {
+                        append("scanNow: failed to scan. ")
+                        append("message: " + e.message)
+                        append(", cause: " + e.cause)
+                        append(", stacktrace: " + e.stackTraceToString())
+                    }
                 )
-                callback.invoke(Pair(3, e.message ?: "Unknown error"))
+                val error = ErrorCodes.ERROR
+                callback.invoke(Pair(error.code, e.message ?:error.message))
             }
     }
+
+    enum class ErrorCodes(
+        val code: Int, val message: String
+    ) {
+        ERROR(1, "Unknown error"),
+        TIMEOUT(2, "Timeout error"),
+        SCAN_CANCELLED(3, "Scan cancelled"),
+        MISSING_PERMISSION_ALERT_WINDOW(4, "missing_permission: Display over other apps.")
+    }
+
 }

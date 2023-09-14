@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import com.abhi.gcsfortasker.CodeScanner
 import com.abhi.gcsfortasker.ScannerService
 import com.abhi.gcsfortasker.barcodeTypes
@@ -18,19 +17,18 @@ import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResult
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultErrorWithOutput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultSucess
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
-import java.util.concurrent.TimeoutException
 
 class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
-    private val TAG = "RunnerCodeScannerAction"
+    private val TAG = javaClass.simpleName
     override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !Settings.canDrawOverlays(context)) {
             Log.e(TAG, "run: Permission - SYSTEM_ALERT_WINDOW not granted")
             requestOverlayPermission(context)
-            return TaskerPluginResultErrorWithOutput(
-                0, "missing_permission: Display over other apps."
-            )
+            val error = CodeScanner.ErrorCodes.MISSING_PERMISSION_ALERT_WINDOW
+            return TaskerPluginResultErrorWithOutput(error.code, error.message)
         }
         val scanner = CodeScanner()
         val deferred = CompletableDeferred<Pair<Int, Any>>()
@@ -42,29 +40,31 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
             }
         }
 
-        var id = -1
-        var output: Any? = null
+        var id: Int
+        var output: Any
         try {
             val result = runBlocking { withTimeout(60_000L) { deferred.await() } }
             id = result.first
             output = result.second
-        } catch (e: TimeoutException) {
-            Log.e(TAG, "run: timedOut. ${e.message} | ${e.cause}")
-            Toast.makeText(context, "action timeout", Toast.LENGTH_SHORT).show()
+        } catch (e: TimeoutCancellationException) {
+            Log.e(TAG, "run: timedOut. message: ${e.message} | cause: ${e.cause}")
+            val error = CodeScanner.ErrorCodes.TIMEOUT
+            id = error.code
+            output = e.message ?: error.message
         }
         //stopping service upon receiving result
         context.stopService(Intent(context, ScannerService::class.java))
-
-        return if (id == 1 && output is Barcode) {
+        Log.d(TAG, "run: id = $id")
+        return if (id == 0 && output is Barcode) {
             val qrcode = output
             Log.d(
-                TAG, "received data. id: $id, value: ${qrcode.rawValue}, type: ${qrcode.valueType}"
+                TAG, "run: received data. value: ${qrcode.rawValue}, type: ${qrcode.valueType}"
             )
             TaskerPluginResultSucess(
                 CodeOutput(qrcode.rawValue, qrcode.displayValue, barcodeTypes[qrcode.valueType])
             )
         } else {
-            val message = output?.toString() ?: "Unknown error"
+            val message = output.toString()
             Log.d(TAG, "run: id: $id, output: $message")
             TaskerPluginResultErrorWithOutput(id, message)
         }
