@@ -3,8 +3,8 @@
 
     <style name="SplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black_alt</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_plain</item>
-        <item name="windowSplashScreenAnimationDuration">100</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_avd</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 </resources>
