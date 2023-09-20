@@ -11,4 +11,28 @@
         <item name="android:inputType">textMultiLine</item>
         <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
     </style>
+
+    <style name="imageButtonStyle" parent="@android:style/Widget.ImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/yellow</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">8dp</item>
+        <item name="android:tint">?android:textColorPrimaryInverse</item>
+    </style>
+
+    <style name="buttonStyle" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">32dp</item>
+        <item name="android:backgroundTint">@color/yellow</item>
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
+    </style>
+
+    <style name="textViewStyle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
+    </style>
 </resources>

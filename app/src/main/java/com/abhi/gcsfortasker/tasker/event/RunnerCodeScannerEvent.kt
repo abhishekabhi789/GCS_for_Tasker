@@ -3,8 +3,8 @@ package com.abhi.gcsfortasker.tasker.event
 import android.content.Context
 import android.util.Log
 import com.abhi.gcsfortasker.InputMatching
-import com.abhi.gcsfortasker.tasker.CodeInputFilter
 import com.abhi.gcsfortasker.tasker.CodeOutput
+import com.abhi.gcsfortasker.tasker.EventInputFilter
 import com.joaomgcd.taskerpluginlibrary.condition.TaskerPluginRunnerConditionEvent
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultCondition
@@ -12,18 +12,27 @@ import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultConditionSatisf
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultConditionUnsatisfied
 
 class RunnerCodeScannerEvent :
-    TaskerPluginRunnerConditionEvent<CodeInputFilter, CodeOutput, CodeOutput>() {
+    TaskerPluginRunnerConditionEvent<EventInputFilter, CodeOutput, CodeOutput>() {
+    private val TAG = javaClass.simpleName
     override fun getSatisfiedCondition(
         context: Context,
-        input: TaskerInput<CodeInputFilter>,
+        input: TaskerInput<EventInputFilter>,
         update: CodeOutput?
     ): TaskerPluginResultCondition<CodeOutput> {
 
         val valueFilter = input.regular.valueFilter
         val typeFilter = input.regular.typeFilter
+        val formatFilter = input.regular.formatFilter
 
-        Log.d("GCS4T:EventRunner", "eventValue: ${update?.rawValue} | eventType: ${update?.codeType}")
-        Log.d("GCS4T:EventRunner", "valueFilter: $valueFilter | typeFilter: $typeFilter")
+
+        Log.d(TAG, buildString {
+            append("filterValues: ")
+            append(valueFilter)
+            append(" | typeFilter: ")
+            append(typeFilter)
+            append(" | formatFilter: ")
+            append(formatFilter)
+        })
         //if value filter is null, no rule for value filter, else match update data with value filter rule
         val valueMatch = if (valueFilter == null) {
             true
@@ -40,13 +49,33 @@ class RunnerCodeScannerEvent :
             true
         } else {
             //check if the code type from event update matches the type filter rule
-            val patternList = typeFilter.split("\\s*,\\s*".toRegex()) // split the pattern string into a list of integers
-            update?.codeType.toString() in patternList // check if codeType integer is in the type filter
+            val allTypes = typeFilter.split(",")
+            update?.codeType.toString() in allTypes
         }
-
-        Log.d("GCS4T:EventRunner", " (valueMatch: $valueMatch | typeMatch: $typeMatch)")
+        val formatMatch = if (formatFilter == null) {
+            true
+        } else {
+            val allFormats = formatFilter.split(",")
+            update?.codFormat.toString() in allFormats
+        }
+        Log.d(TAG, buildString {
+            append("valueMatch: ")
+            append(valueMatch)
+            append(" | typeMatch: ")
+            append(typeMatch)
+            append(" | formatMatch: ")
+            append(formatMatch)
+        })
+        Log.d(TAG, buildString {
+            append("scanNow: Success- value: ")
+            append(update?.rawValue)
+            append(", type: ")
+            append(update?.codeType)
+            append(", format: ")
+            append(update?.codFormat)
+        })
 //trigger the event only if both value and type rules are matched
-        return if (valueMatch && typeMatch) {
+        return if (valueMatch && typeMatch && formatMatch) {
             TaskerPluginResultConditionSatisfied(context, update)
         } else TaskerPluginResultConditionUnsatisfied()
     }

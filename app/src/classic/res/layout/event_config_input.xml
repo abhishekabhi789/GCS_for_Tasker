@@ -13,22 +13,21 @@
         android:paddingTop="16dp">
 
         <TextView
-            android:id="@+id/valueFilterTitle"
+            android:id="@+id/value_filter_title"
+            style="@style/textViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="@string/value_filter_helper_text"
-            android:textSize="14sp" />
+            android:text="@string/value_filter_helper_text" />
 
         <TextView
-            android:id="@+id/regexSwitchStatus"
+            android:id="@+id/regex_switch_status"
+            style="@style/textViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/switch_text_off"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="14sp" />
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/switch_text_off" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,12 +35,13 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/valueFilter"
+            android:id="@+id/value_filter"
             style="@style/textInputStyle"
-            android:hint="@string/value_filter_hint" />
+            android:hint="@string/value_filter_hint"
+            android:importantForAutofill="no" />
 
         <Switch
-            android:id="@+id/useRegexSwitch"
+            android:id="@+id/use_regex_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -53,56 +53,77 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/typeFilterTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:paddingVertical="8dp"
-        android:text="@string/type_filter_helper_text"
-        android:textSize="14sp" />
+        android:id="@+id/type_filter_title"
+        style="@style/textViewStyle"
+        android:text="@string/type_filter_helper_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
-            android:id="@+id/typeFilter"
+            android:id="@+id/type_filter"
             style="@style/textInputStyle"
-            android:hint="@string/type_filter_hint" />
+            android:hint="@string/type_filter_hint"
+            android:importantForAutofill="no" />
 
         <ImageButton
-            android:id="@+id/chooseTypesImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ffb609"
+            android:id="@+id/choose_types_button"
+            style="@style/imageButtonStyle"
             android:contentDescription="@string/choose_type_button_description"
-            android:src="@drawable/ic_select"
-            android:tint="?android:textColorPrimaryInverse" />
+            android:src="@drawable/ic_select" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/format_filter_title"
+        style="@style/textViewStyle"
+        android:text="@string/format_filter_helper_text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/format_filter"
+            style="@style/textInputStyle"
+            android:hint="@string/format_filter_hint" />
+
+        <ImageButton
+            android:id="@+id/choose_formats_button"
+            style="@style/imageButtonStyle"
+            android:contentDescription="@string/choose_format_button_description"
+            android:src="@drawable/ic_select" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/saveConfigButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/save_config_button"
+        style="@style/buttonStyle"
         android:layout_gravity="center_horizontal"
         android:layout_margin="32dp"
-        android:backgroundTint="#ffb609"
-        android:text="@string/save_config_button_text"
-        android:textColor="?android:textColorPrimaryInverse"  />
+        android:text="@string/save_config_button_text" />
 
     <TextView
         android:id="@+id/code_types_list_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/code_types_list_title"
-        android:textColor="?android:textColorSecondary" />
+        style="@style/textViewStyle"
+        android:text="@string/code_types_list_title" />
 
     <TextView
         android:id="@+id/code_types_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/textViewStyle"
         android:lines="3"
+        android:textColor="?android:textColor"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:id="@+id/code_formats_list_title"
+        style="@style/textViewStyle"
+        android:text="@string/code_formats_list_title" />
+
+    <TextView
+        android:id="@+id/code_formats_list"
+        style="@style/textViewStyle"
+        android:lines="3"
+        android:textColor="?android:textColor"
         android:textIsSelectable="true" />
 
 </LinearLayout>

@@ -8,10 +8,13 @@ import android.provider.Settings
 import android.util.Log
 import com.abhi.gcsfortasker.CodeScanner
 import com.abhi.gcsfortasker.ScannerService
-import com.abhi.gcsfortasker.barcodeTypes
+import com.abhi.gcsfortasker.getNameOfTheField
+import com.abhi.gcsfortasker.setBarcodeFormatsFromString
+import com.abhi.gcsfortasker.tasker.ActionInputFilter
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.google.mlkit.vision.barcode.common.Barcode
-import com.joaomgcd.taskerpluginlibrary.action.TaskerPluginRunnerActionNoInput
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import com.joaomgcd.taskerpluginlibrary.action.TaskerPluginRunnerAction
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResult
 import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultErrorWithOutput
@@ -21,21 +24,31 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 
-class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
+class RunnerCodeScannerAction : TaskerPluginRunnerAction<ActionInputFilter, CodeOutput>() {
     private val TAG = javaClass.simpleName
-    override fun run(context: Context, input: TaskerInput<Unit>): TaskerPluginResult<CodeOutput> {
+    override fun run(
+        context: Context,
+        input: TaskerInput<ActionInputFilter>
+    ): TaskerPluginResult<CodeOutput> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !Settings.canDrawOverlays(context)) {
             Log.e(TAG, "run: Permission - SYSTEM_ALERT_WINDOW not granted")
             requestOverlayPermission(context)
             val error = CodeScanner.ErrorCodes.MISSING_PERMISSION_ALERT_WINDOW
             return TaskerPluginResultErrorWithOutput(error.code, error.message)
         }
+        val customOptions = GmsBarcodeScannerOptions.Builder().apply {
+            if (input.regular.allowZooming) enableAutoZoom()
+            if (input.regular.allowManualInput) allowManualInput()
+            if (!input.regular.formatFilter.isNullOrEmpty())
+                setBarcodeFormatsFromString(this, input.regular.formatFilter!!)
+        }.build()
+
         val scanner = CodeScanner()
         val deferred = CompletableDeferred<Pair<Int, Any>>()
         runBlocking {
             //stating service before scanning
             context.startService(Intent(context, ScannerService::class.java))
-            scanner.scanNow(context) { result ->
+            scanner.scanNow(context, customOptions) { result ->
                 deferred.complete(result)
             }
         }
@@ -58,10 +71,20 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
         return if (id == 0 && output is Barcode) {
             val qrcode = output
             Log.d(
-                TAG, "run: received data. value: ${qrcode.rawValue}, type: ${qrcode.valueType}"
+                TAG, buildString {
+                    append("run: received data.")
+                    append(" value: ${qrcode.rawValue}")
+                    append(", type: ${qrcode.valueType}")
+                    append(", format: ${qrcode.format}")
+                }
             )
             TaskerPluginResultSucess(
-                CodeOutput(qrcode.rawValue, qrcode.displayValue, barcodeTypes[qrcode.valueType])
+                CodeOutput(
+                    qrcode.rawValue,
+                    qrcode.displayValue,
+                    getNameOfTheField(qrcode.valueType, false),
+                    getNameOfTheField(qrcode.format, true)
+                )
             )
         } else {
             val message = output.toString()
@@ -69,7 +92,9 @@ class RunnerCodeScannerAction : TaskerPluginRunnerActionNoInput<CodeOutput>() {
             TaskerPluginResultErrorWithOutput(id, message)
         }
     }
-
+/**Added to fix [issue #1](https://github.com/abhishekabhi789/GCS_for_Tasker/issues/1)
+ * MoreInfo: [Restrictions on starting activities from the background](https://developer.android.com/guide/components/activities/background-starts)
+ **/
     private fun requestOverlayPermission(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val intent = Intent(

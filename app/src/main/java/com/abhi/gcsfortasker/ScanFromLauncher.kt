@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.abhi.gcsfortasker.tasker.event.ActivityConfigScanEvent
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -31,7 +30,8 @@ class ScanFromLauncher : Activity() {
                             CodeOutput(
                                 qrcode.rawValue,
                                 qrcode.displayValue,
-                                barcodeTypes[qrcode.valueType]
+                                getNameOfTheField(qrcode.valueType,false),
+                                getNameOfTheField(qrcode.format,true)
                             )
                         )
                     } catch (e: Exception) {
@@ -41,7 +41,7 @@ class ScanFromLauncher : Activity() {
 
                 else -> {
                     val message = output as String
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    message.toToast(this)
                     Log.e(TAG, "Error returned from scanner: $message")
                 }
             }

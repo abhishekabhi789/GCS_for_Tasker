@@ -1,36 +1,51 @@
 <resources>
     <string name="app_name" translatable="false">GCS for Tasker</string>
-<!--    Output variables-->
+    <!--    Output variables-->
     <string name="io_out_raw_value_label">Raw Value</string>
-    <string name="io_out_raw_value_description">Raw QR data scanned</string>
+    <string name="io_out_raw_value_description">Raw code data scanned</string>
     <string name="io_out_code_type_label">Code Type</string>
-    <string name="io_out_code_type_description">Type of the QR code</string>
+    <string name="io_out_code_type_description">Type of the code</string>
     <string name="io_out_display_value_label">Display Value</string>
-    <string name="io_out_display_value_description">QR data in readable form</string>
-<!--    Filter input error messages when user gives invalid input-->
+    <string name="io_out_display_value_description">Code data in readable form</string>
+    <string name="io_out_code_format_label">Code Format</string>
+    <string name="io_out_code_format_description">Encoding format of the code</string>
+    <!--    Filter input error messages when user gives invalid input-->
     <string name="invalid_type_filter">Invalid type filter</string>
     <string name="invalid_value_filter">Invalid value filter</string>
-    <string name="invalid_value_and_type_filter">Invalid value and type filter</string>
-<!--    Event Config Activity-->
-<!--    Text input fields-->
+    <string name="invalid_format_filter">Invalid format filter</string>
+    <string name="invalid_input_configs">Invalid input configs</string>
+    <!--    Event Config Activity-->
+    <!--    Text input fields-->
     <string name="value_filter_helper_text">Use simple match or regex rules</string>
     <string name="value_filter_hint">Enter value filter</string>
-    <string name="type_filter_helper_text">Select using the search icon</string>
+    <string name="type_filter_helper_text">Enter comma separated types</string>
     <string name="type_filter_hint">Enter type filter</string>
-<!--    Text input error messages-->
+    <string name="format_filter_helper_text">Enter comma separated formats</string>
+    <string name="format_filter_hint">Enter format filter</string>
+    <!--    Text input error messages-->
     <string name="value_not_valid_error">Enter valid match pattern or regex</string>
-    <string name="type_not_valid_error">Enter correct values, use the search button for help</string>
-<!--    Regex switch status-->
+    <string name="type_not_valid_error">Enter correct type values, use the search button for help</string>
+    <string name="format_not_valid_error">Enter correct format values, use the search button for help</string>
+    <!--    Regex switch status-->
     <string name="switch_text_off">Simple</string>
     <string name="switch_text_on">Regex</string>
-<!--    Description for unlabeled list variable button-->
-    <string name="choose_type_button_description">choose qrcode button</string>
-<!--    Choose variable dialog-->
+    <!--    Description for buttons-->
+    <string name="choose_type_button_description">Choose code type button</string>
+    <string name="choose_format_button_description">Choose code format button</string>
+    <string name="choose_variable_button_description">Choose variable button</string>
+    <!--    Choose variable dialog-->
+    <string name="choose_a_variable">Choose a variable</string>
     <string name="choose_code_type_dialog_title">Choose code types</string>
-    <string name="clear">Clear All</string>
-<!--    Save configuration-->
+    <string name="choose_code_format_dialog_title">Choose code formats</string>
+    <string name="clear_all">Clear All</string>
+    <!--    Save configuration-->
     <string name="save_config_button_text">Save</string>
     <string name="configuration_saved">Configuration Saved.</string>
+    <!--    Other strings-->
     <string name="code_types_list_title">These are the code types</string>
-
+    <string name="code_formats_list_title">These are the code formats</string>
+    <string name="enable_auto_zoom">Enable auto zoom</string>
+    <string name="allow_manual_input">Allow manual input</string>
+    <string name="no_variable_to_show">No variable to show!</string>
+    <string name="event_config_blurb_message">\nEvent will trigger upon successful scan from launcher shortcut.</string>
 </resources>

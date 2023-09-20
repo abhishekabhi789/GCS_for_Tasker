@@ -20,10 +20,13 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-dontobfuscate
 #-keep class com.abhi.gcsfortasker.** { *; }
 -keep class com.joaomgcd.taskerpluginlibrary.** { *; }
 #-keep class com.google.android.gms.common.moduleinstall.ModuleInstall
 #-keep class com.google.android.gms.tflite.java.TfLite
 #-keep class com.google.mlkit.vision.barcode.** { *; }
 #-keep class com.google.mlkit.vision.codescanner.** { *; }
--dontobfuscate
+#Barcode is accessed via reflection. see utils.kt
+-keep class com.google.mlkit.vision.barcode.common.Barcode { *; }
+

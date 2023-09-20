@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="ShapeAppearanceOverlay.MyApp.Button.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="textInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="textInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/boxCornerRadius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/boxCornerRadius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/boxCornerRadius</item>
@@ -14,5 +14,41 @@
         <item name="endIconDrawable">@drawable/ic_clear</item>
         <item name="endIconMode">clear_text</item>
         <item name="errorEnabled">true</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="editTextStyle" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:lines">10</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+    </style>
+
+    <style name="textViewStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="switchStyle" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">4dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+    </style>
+
+    <style name="buttonStyle" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:backgroundTint">@color/yellow</item>
+        <item name="iconTint">?android:textColorPrimaryInverse</item>
     </style>
 </resources>

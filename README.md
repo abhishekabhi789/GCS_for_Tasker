@@ -31,7 +31,7 @@ does it store or share any data except with Tasker.
 
 ## :dna: Variants
 
-There are two variants available for this project based on the theme used in event configuration activity. Classic themed app is smaller in size and material themed app is around 4 times bigger. Both are having same package name and are signed with same key, you can switch them anytime. It's recommended to clear the app data after such switching to release space consumed by previous variant.
+There are two variants available for this project based on the theme used in event configuration activity. Classic themed app is smaller in size and material themed app is around 4 times bigger. Both are having same package name and are signed with same key, you can switch them anytime. It's recommended to clear the app data after such switching to release storage space consumed by previous variant.
 
 <details><summary>
 
@@ -45,12 +45,17 @@ Install this plugin app and Tasker.
   list. From there, you can configure the event based on your preferences.
 	
 	* Value filter: The event will trigger only when the raw value of the scanned code matches the value filter. This field supports both simple and regex matching. Adjust the switch next to this field to choose simple matching or regex matching.
+	* Type filter: The event will trigger only when the qr code type matches any of the type filter. Refer [Barcode.BarcodeValueType](https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeValueType) for more about code types.
+  * Format filter: The event will trigger only when the code format matches any of the format filter. Refer [Barcode.BarcodeFormat](https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeFormat) for more about code formats.
 	
-	* Type filter: The event will trigger only when the qr code type matches the type filter. Refer [BarcodeValueType](https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeValueType) for information about code types. Use the search icon next to this field to easily select code types.
+  The event will trigger only if all specified filters are satisfied.
 	
-	If both the value filter and type filter are defined, then the event triggers only if both conditions are satisfied.
-	
-- For actions, select "Plugin" from the "Select action category" list, and then choose "GCS for Tasker". Action plugins do not require any inputs, Upon saving a "Configuration Saved" toast message will be displayed.
+- For actions, select "Plugin" from the "Select action category" list, and then choose "GCS for Tasker". Then on the configuration activity you can configure below settings.
+  * Format filter: The code scanner will only detect codes having the chosen format.
+  * Enable auto zoom: The scanner will try to automatically zoom the camera towards the code.
+  * Allow manual input: The scanner allows manual input of code value.
+
+All the code types and code formats can be copied from event and action configuration.
 
 #### In GCS for Tasker
 
@@ -73,12 +78,6 @@ Here's an example project. Import it from [TaskerNet](https://taskernet.com/shar
   > No, the app uses the unbundled Google code scanner API provided by Google Play Services on the
   device.
 
- #### Why does this app use the Google Code Scanner?
- >- Easy to Implement and use.
- >- It can scan QR codes quickly.
- >- Scans damaged or distorted QR codes accurately.
- >- Supports a variety of QR code formats.
-
  #### Does the app require an internet connection to function?
   > This app does not require an internet connection since the scanner library is capable of working
   offline. However, Google Play Services requires an internet connection to download QR scanner
@@ -95,11 +94,6 @@ Here's an example project. Import it from [TaskerNet](https://taskernet.com/shar
 ## :wrench: Troubleshoot
 </summary>
 
- #### Keep seeing the message 'Waiting for the Barcode UI module to be downloaded' whenever trying to scan a code.
-  > This means the device doesn't have the scanner modules, and Google Play Service will try to
-  download the module. Allow some time and ensure network connectivity to complete the download. The
-  download task is hidden and handled by Google Play Services. If the issue persists, check [Scanner module not downloading](#scanner-module-not-downloading).
-
  #### Scanner module not downloading.
   >- Ensure internet connection.
   >- Ensure battery saver is turned off.
@@ -115,17 +109,4 @@ Here's an example project. Import it from [TaskerNet](https://taskernet.com/shar
   >- Check Tasker run log.
   >- Try both event and action.
   >- Create a new event/action without any filter rules and flash the output.
-  >
-  >  If you think it could be a bug, create an issue with relevant data.
-  > **Warning** 
-  > Careful with posting qr images and other data as they may contain personal data.
-  
- #### Toast message saying "Scanning failed"
-  > Probably due to bugs with scanner module.
-  Try
-  >- Clearing the data of Google Play Services.
-    > **Attention** 
-  > Use caution when deleting.
-  >- Upgrade or downgrade Google Play Services.
-  >- Wait for a bug fix from google.
 </details>

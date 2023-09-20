@@ -2,73 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/event_config_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".tasker.event.ActivityConfigScanEvent">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/value_filter_layout"
-        style="@style/textInputLayoutStyle"
-        android:hint="@string/value_filter_hint"
-        app:helperText="@string/value_filter_helper_text"
-        app:layout_constraintEnd_toStartOf="@id/use_regex_switch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/value_filter"
-            style="@style/editTextStyle" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/regex_switch_status"
-        style="@style/textViewStyle"
-        android:layout_width="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/use_regex_switch"
-        app:layout_constraintStart_toStartOf="@id/use_regex_switch"
-        app:layout_constraintTop_toTopOf="@id/value_filter_layout"
-        tools:text="Matching" />
-
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/use_regex_switch"
-        style="@style/switchStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/regex_switch_status" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/type_filter_layout"
-        style="@style/textInputLayoutStyle"
-        android:hint="@string/type_filter_hint"
-        app:helperText="@string/type_filter_helper_text"
-        app:layout_constraintEnd_toEndOf="@id/value_filter_layout"
-        app:layout_constraintStart_toStartOf="@id/value_filter_layout"
-        app:layout_constraintTop_toBottomOf="@id/value_filter_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/type_filter"
-           style="@style/editTextStyle" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/choose_types_button"
-        style="@style/buttonStyle"
-        android:contentDescription="@string/choose_type_button_description"
-        app:icon="@drawable/ic_select"
-        app:layout_constraintBottom_toBottomOf="@id/type_filter_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/type_filter_layout"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
+    tools:context=".tasker.action.ActivityConfigScanAction">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/format_filter_layout"
         style="@style/textInputLayoutStyle"
         android:hint="@string/format_filter_hint"
         app:helperText="@string/format_filter_helper_text"
-        app:layout_constraintEnd_toEndOf="@id/type_filter_layout"
-        app:layout_constraintStart_toStartOf="@id/type_filter_layout"
-        app:layout_constraintTop_toBottomOf="@id/type_filter_layout">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/format_filter"
@@ -78,12 +24,35 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choose_formats_button"
         style="@style/buttonStyle"
-        android:contentDescription="@string/choose_type_button_description"
+        android:layout_marginHorizontal="4dp"
+        android:contentDescription="@string/choose_format_button_description"
         app:icon="@drawable/ic_select"
-        app:layout_constraintBottom_toBottomOf="@id/format_filter_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/format_filter_layout"
+        app:layout_constraintEnd_toStartOf="@id/choose_variable_button"
+        app:layout_constraintTop_toBottomOf="@id/format_filter_layout"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/choose_variable_button"
+        style="@style/buttonStyle"
+        android:contentDescription="@string/choose_variable_button_description"
+        app:icon="@drawable/ic_variable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/format_filter_layout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/allow_auto_zoom"
+        style="@style/switchStyle"
+        android:text="@string/enable_auto_zoom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/choose_variable_button" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/allow_manual_input"
+        style="@style/switchStyle"
+        android:text="@string/allow_manual_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/allow_auto_zoom" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_config_button"
@@ -101,7 +70,7 @@
         app:icon="@drawable/ic_done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/format_filter_layout" />
+        app:layout_constraintTop_toBottomOf="@id/allow_manual_input" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/code_types_list_title"

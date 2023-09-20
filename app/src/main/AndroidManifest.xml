@@ -25,6 +25,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
+            android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +38,7 @@
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="Scan Action"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
@@ -58,7 +59,7 @@
             android:name=".ScannerService"
             android:enabled="true"
             android:exported="false"
-            android:stopWithTask="true"/>
+            android:stopWithTask="true" />
 
     </application>
 
