@@ -54,6 +54,14 @@
                 <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ShortCutActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="com.abhi.gcsfortasker.ADD_SHORTCUT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".ScannerService"

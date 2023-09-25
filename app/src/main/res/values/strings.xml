@@ -41,6 +41,10 @@
     <!--    Save configuration-->
     <string name="save_config_button_text">Save</string>
     <string name="configuration_saved">Configuration Saved.</string>
+    <!--    Shortcuts-->
+    <string name="initial_shortcut_short_label">Add a task shortcut</string>
+    <string name="initial_shortcut_long_label">You can add a related tasker task here</string>
+    <string name="no_shortcut_from_tasker">No shortcut received from Tasker!</string>
     <!--    Other strings-->
     <string name="code_types_list_title">These are the code types</string>
     <string name="code_formats_list_title">These are the code formats</string>

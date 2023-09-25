@@ -16,7 +16,7 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 
 
-/**Get the name of the field. isFormat should be true if values is [Barcode.getFormat]*/
+/**Get the name of the field. isFormat should be true if values is from [Barcode.getFormat]*/
 fun getNameOfTheField(value: Int, isFormat: Boolean): String? {
     val prefix = if (isFormat) "FORMAT_" else "TYPE_"
     val fields = Barcode::class.java.fields

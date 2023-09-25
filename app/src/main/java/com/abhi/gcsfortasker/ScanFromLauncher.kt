@@ -2,6 +2,7 @@ package com.abhi.gcsfortasker
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.abhi.gcsfortasker.tasker.CodeOutput
@@ -16,6 +17,9 @@ class ScanFromLauncher : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         actionBar?.hide()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            ShortCutActivity().createShortcut(applicationContext)
+        }
         val serviceIntent = Intent(this, ScannerService::class.java)
         this.startService(serviceIntent)
         val scanner = CodeScanner()
@@ -26,12 +30,11 @@ class ScanFromLauncher : Activity() {
                     try {
                         val qrcode = output as Barcode
                         ActivityConfigScanEvent::class.java.requestQuery(
-                            this,
-                            CodeOutput(
+                            this, CodeOutput(
                                 qrcode.rawValue,
                                 qrcode.displayValue,
-                                getNameOfTheField(qrcode.valueType,false),
-                                getNameOfTheField(qrcode.format,true)
+                                getNameOfTheField(qrcode.valueType, false),
+                                getNameOfTheField(qrcode.format, true)
                             )
                         )
                     } catch (e: Exception) {
