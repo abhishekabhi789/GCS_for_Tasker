@@ -2,7 +2,6 @@ package com.abhi.gcsfortasker
 
 import android.app.Activity
 import com.google.android.material.textfield.TextInputLayout
-import net.dinglisch.android.tasker.TaskerPlugin.variableNameValid
 
 fun validateEventConfigInput(
     activity: Activity,
@@ -14,10 +13,7 @@ fun validateEventConfigInput(
         val filterArray = typeFilter.split(",").map { it.trim() }
         filterArray.all { it in getCodeFields(false) }
     }
-    val formatValid = if (formatFilter.isEmpty()) true else run {
-        val filterArray = formatFilter.split(",").map { it.trim() }
-        filterArray.all { it in getCodeFields(true) }
-    }
+    val formatValid = isValidFormatFilter(formatFilter)
     val valueLayout = activity.findViewById<TextInputLayout>(R.id.value_filter_layout)
     val typeLayout = activity.findViewById<TextInputLayout>(R.id.type_filter_layout)
     val formatLayout = activity.findViewById<TextInputLayout>(R.id.format_filter_layout)
@@ -27,10 +23,12 @@ fun validateEventConfigInput(
 
     if (!typeValid) typeLayout.error =
         activity.getString(R.string.type_not_valid_error) else typeLayout.error = null
-    if (!formatValid) formatLayout.error = activity.getString(R.string.format_not_valid_error)
+    if (!formatValid) formatLayout.error =
+        activity.getString(R.string.format_not_valid_error) else formatLayout.error = null
+
     //return as a pair of error(Boolean) and error(reason)
     return when {
-        !typeValid && !formatValid -> Pair(
+        !valueValid && !typeValid && !formatValid -> Pair(
             false,
             activity.getString(R.string.invalid_input_configs)
         )
@@ -43,14 +41,10 @@ fun validateEventConfigInput(
 }
 
 fun validateActionConfigInput(activity: Activity, formatFilter: String): Pair<Boolean, String> {
-    val formatValid = if (formatFilter.isEmpty()) true
-    else if (variableNameValid(formatFilter)) true
-    else run {
-        val filterArray = formatFilter.split(",").map { it.trim() }
-        filterArray.all { it in getCodeFields(true) }
-    }
+    val formatValid = isValidFormatConfig(formatFilter)
     val formatLayout = activity.findViewById<TextInputLayout>(R.id.format_filter_layout)
-    if (!formatValid) formatLayout.error = activity.getString(R.string.format_not_valid_error)
+    if (!formatValid) formatLayout.error =
+        activity.getString(R.string.format_not_valid_error) else formatLayout.error = null
     return if (!formatValid) Pair(false, activity.getString(R.string.invalid_format_filter))
     else Pair(true, "")
 }

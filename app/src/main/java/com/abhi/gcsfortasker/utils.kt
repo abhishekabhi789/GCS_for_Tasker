@@ -14,6 +14,7 @@ import com.abhi.gcsfortasker.tasker.action.CodeScannerActionHelper
 import com.abhi.gcsfortasker.tasker.event.CodeScannedEventHelper
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import net.dinglisch.android.tasker.TaskerPlugin
 
 
 /**Get the name of the field. isFormat should be true if values is from [Barcode.getFormat]*/
@@ -53,6 +54,7 @@ fun String.toToast(context: Context) {
         Toast.makeText(context, this, Toast.LENGTH_LONG).show()
     }
 }
+
 /**Shows a single choice list*/
 fun Activity.showSingleChoiceDialog(
     title: String,
@@ -147,9 +149,9 @@ fun chooseVariable(activity: Activity, taskerHelper: CodeScannerActionHelper) {
 /**Save Event configuration after validating*/
 fun saveEventConfig(activity: Activity, taskerHelper: CodeScannedEventHelper) {
     val typeFilterField = activity.findViewById<EditText>(R.id.type_filter)
-    typeFilterField.setText(typeFilterField.text.toString().replace(" ",""))
+    typeFilterField.setText(typeFilterField.text.toString().replace(" ", ""))
     val formatFilterField = activity.findViewById<EditText>(R.id.format_filter)
-    formatFilterField.setText(formatFilterField.text.toString().replace(" ",""))
+    formatFilterField.setText(formatFilterField.text.toString().replace(" ", ""))
     val (isValid, reason) = validateEventConfigInput(
         activity,
         typeFilterField.text.toString(),
@@ -165,7 +167,7 @@ fun saveEventConfig(activity: Activity, taskerHelper: CodeScannedEventHelper) {
 /**Save Action configuration after validating*/
 fun saveActionConfig(activity: Activity, taskerHelper: CodeScannerActionHelper) {
     val formatFilterField = activity.findViewById<EditText>(R.id.format_filter)
-    formatFilterField.setText(formatFilterField.text.toString().replace(" ",""))
+    formatFilterField.setText(formatFilterField.text.toString().replace(" ", ""))
     val (isValid, reason) = validateActionConfigInput(activity, formatFilterField.text.toString())
 
     if (isValid && taskerHelper.onBackPressed().success) {
@@ -181,19 +183,35 @@ fun setBarcodeFormatsFromString(builder: GmsBarcodeScannerOptions.Builder, forma
     for (formatName in formatNames) {
         try {
             val constantName = "FORMAT_${formatName.uppercase()}"
-            Log.d("TAG", "setBarcodeFormatsFromString: $constantName")
+            Log.d("utils", "setBarcodeFormatsFromString: $constantName")
             val field = Barcode::class.java.getDeclaredField(constantName)
             val constantValue = field.getInt(null)
             if (constantValue < 1) continue //to avoid conflicts
             formats.add(constantValue)
         } catch (e: NoSuchFieldException) {
             // Handle the case when the field is not found
-            Log.e("util:formatFromString", "Field not found for formatName: $formatName")
+            Log.e("utils", "formatFromString: Field not found for formatName: $formatName")
         } catch (e: IllegalAccessException) {
             // Handle the case when access to the field is not allowed
-            Log.e("util:formatFromString", "Access to field denied for formatName: $formatName")
+            Log.e("utils", "formatFromString: Access to field denied for formatName: $formatName")
         }
     }
     if (formats.size == 1) builder.setBarcodeFormats(formats[0]) else
         builder.setBarcodeFormats(formats[0], *formats.subList(1, formats.size).toIntArray())
+}
+
+/**A valid format filter will either empty or belongs to [Barcode.getFormat]*/
+fun isValidFormatFilter(input: String): Boolean {
+    return if (input.isEmpty()) true
+    else run {
+        val filterArray = input.split(",").map { it.trim() }
+        filterArray.all { it in getCodeFields(true) }
+    }
+}
+
+/**Check whether the format filter input config is valid or not, if it is not a variable input, it will be checked at [isValidFormatFilter]*/
+fun isValidFormatConfig(input: String): Boolean {
+    return if (input.startsWith("%")) {
+        TaskerPlugin.variableNameValid(input.replace("()", ""))
+    } else isValidFormatFilter(input)
 }

@@ -46,12 +46,8 @@ class ShortCutActivity : Activity() {
     @RequiresApi(Build.VERSION_CODES.N_MR1)
     fun createShortcut(context: Context) {
         if (!isShortcutAdded(context)) {
-            val intent = Intent(
-                "com.abhi.gcsfortasker.ADD_SHORTCUT",
-                null,
-                context,
-                ShortCutActivity::class.java
-            )
+            val intent =
+                Intent(SHORTCUT_ACTIVITY_INTENT, null, context, ShortCutActivity::class.java)
             val icon = IconCompat.createWithResource(context, R.drawable.ic_select)
             val shortLabel = context.getString(R.string.initial_shortcut_short_label)
             val longLabel = context.getString(R.string.initial_shortcut_long_label)
@@ -111,6 +107,7 @@ class ShortCutActivity : Activity() {
     companion object {
         private const val SHORTCUT_ID = "dynamic_shortcut_1"
         private const val CREATE_SHORTCUT_REQUEST_CODE = 789
+        private const val SHORTCUT_ACTIVITY_INTENT = "com.abhi.gcsfortasker.ADD_SHORTCUT"
         private const val TASKER_PACKAGE_NAME = "net.dinglisch.android.taskerm"
         private const val TASKER_SHORTCUT_ACTIVITY_NAME =
             "$TASKER_PACKAGE_NAME.TaskerAppWidgetConfigureShortcut"
