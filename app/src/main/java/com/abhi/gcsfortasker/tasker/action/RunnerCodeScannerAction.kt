@@ -30,6 +30,7 @@ class RunnerCodeScannerAction : TaskerPluginRunnerAction<ActionInputFilter, Code
         context: Context,
         input: TaskerInput<ActionInputFilter>
     ): TaskerPluginResult<CodeOutput> {
+        val actionTimeout:Long = (requestedTimeout?:60_000L).toLong()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !Settings.canDrawOverlays(context)) {
             Log.e(TAG, "run: Permission - SYSTEM_ALERT_WINDOW not granted")
             requestOverlayPermission(context)
@@ -56,7 +57,7 @@ class RunnerCodeScannerAction : TaskerPluginRunnerAction<ActionInputFilter, Code
         var id: Int
         var output: Any
         try {
-            val result = runBlocking { withTimeout(60_000L) { deferred.await() } }
+            val result = runBlocking { withTimeout(actionTimeout) { deferred.await() } }
             id = result.first
             output = result.second
         } catch (e: TimeoutCancellationException) {

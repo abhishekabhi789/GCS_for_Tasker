@@ -22,7 +22,7 @@
 
 -dontobfuscate
 #-keep class com.abhi.gcsfortasker.** { *; }
--keep class com.joaomgcd.taskerpluginlibrary.** { *; }
+#-keep class com.joaomgcd.taskerpluginlibrary.** { *; }
 #-keep class com.google.android.gms.common.moduleinstall.ModuleInstall
 #-keep class com.google.android.gms.tflite.java.TfLite
 #-keep class com.google.mlkit.vision.barcode.** { *; }

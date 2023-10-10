@@ -40,7 +40,7 @@ fun getCodeFieldNames(isFormat: Boolean): Array<String> {
     }.toTypedArray()
 }
 
-/**Returns an array of all code types*/
+/**Returns an array of all code types without formatting*/
 fun getCodeFields(isFormat: Boolean): Array<String> {
     val prefix = if (isFormat) "FORMAT_" else "TYPE_"
     return Barcode::class.java.fields.filter { it.name.startsWith(prefix) }.map {
@@ -189,10 +189,8 @@ fun setBarcodeFormatsFromString(builder: GmsBarcodeScannerOptions.Builder, forma
             if (constantValue < 1) continue //to avoid conflicts
             formats.add(constantValue)
         } catch (e: NoSuchFieldException) {
-            // Handle the case when the field is not found
             Log.e("utils", "formatFromString: Field not found for formatName: $formatName")
         } catch (e: IllegalAccessException) {
-            // Handle the case when access to the field is not allowed
             Log.e("utils", "formatFromString: Access to field denied for formatName: $formatName")
         }
     }

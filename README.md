@@ -109,4 +109,10 @@ Here's an example project. Import it from [TaskerNet](https://taskernet.com/shar
   >- Check Tasker run log.
   >- Try both event and action.
   >- Create a new event/action without any filter rules and flash the output.
+
+ #### Scanner UI doesn't dismiss after action timeout.
+
+> The library does not provide a method to programmatically close or set a timeout for the scanner.
+> You can consider using Tasker/AutoInput to click the close button or the back button after the action fails due to timeout.
+
 </details>

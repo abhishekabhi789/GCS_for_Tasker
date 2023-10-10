@@ -42,7 +42,7 @@ class ShortCutActivity : Activity() {
         ShortcutManagerCompat.addDynamicShortcuts(context, shortcutInfoList)
         Log.d(TAG, "updateShortcut: updated")
     }
-
+/**Creates the initial shortcut, which gets task shortcut.*/
     @RequiresApi(Build.VERSION_CODES.N_MR1)
     fun createShortcut(context: Context) {
         if (!isShortcutAdded(context)) {

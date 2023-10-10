@@ -67,7 +67,8 @@
             android:name=".ScannerService"
             android:enabled="true"
             android:exported="false"
-            android:stopWithTask="true" />
+            android:stopWithTask="true"
+            android:foregroundServiceType="shortService"/>
 
     </application>
 
