@@ -37,18 +37,21 @@ class PatternMatchingTest {
         // `/` means 'or', it divides up multiple possible matches
         assertTrue(InputMatching().matchStrings("anything ending with shell", "Help/*shell", false))
         // a * will match any number of any character. It's not possible to specifically match a * character.
-        //assertTrue(InputMatching().matchStrings("abcdefghijklmnopqsrtuvwxyz", "*z*", false))
+        assertTrue(InputMatching().matchStrings("abcdefghijklmnopqsrtuvwxyz", "*z*", false))
         // a + will match one or more of any character. It's not possible to specifically match a + character.
         assertFalse(InputMatching().matchStrings("abcdefghijklmnopqsrtuvwxyz", "*z+", false))
         // Beware: the condition '%var matches +' will be true if %var has not been assigned a value, because Tasker does not replace variables which do not have a value.
-        assertTrue(InputMatching().matchStrings("%var", "*", false))
+        assertTrue(InputMatching().matchStrings("%var", "+", false))
         // matching is case-insensitive (magic will match with MagiC) unless the pattern contains an upper-case letter e.g. Magic* will not match against magically, but it will match against Magic Roundabout
         assertTrue(InputMatching().matchStrings("MagiC", "magic", false))
-        //assertFalse(InputMatching().matchStrings("magically", "Magic*", false))
+        assertFalse(InputMatching().matchStrings("magically", "Magic*", false))
         assertTrue(InputMatching().matchStrings("Magic Roundabout", "Magic*", false))
         //  a ! at the very start of a match means not e.g. !*Magic*/*Yellow* matches anything not containing the words Magic or Yellow
-        assertFalse(InputMatching().matchStrings("anything not containing the words Magic or Yellow", " !*Magic*/*Yellow*", false))
+        assertFalse(InputMatching().matchStrings("anything not containing the word Magic", "!*Magic*/*Yellow*", false))
+        assertFalse(InputMatching().matchStrings("anything not containing the word Yellow", "!*Magic*/*Yellow*", false))
         assertFalse(InputMatching().matchStrings("the quick brown fox", " !*Magic*/*Yellow*", false))
+        //False positive, described in rules
+        assertTrue(InputMatching().matchStrings("%var","+",false))
 
     }
     @Test
