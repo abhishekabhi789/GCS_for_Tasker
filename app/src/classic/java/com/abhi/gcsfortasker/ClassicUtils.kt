@@ -1,6 +1,9 @@
 package com.abhi.gcsfortasker
 
 import android.content.Context
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getCodeFields
+import com.abhi.gcsfortasker.utils.InputUtils.isValidFormatConfig
+import com.abhi.gcsfortasker.utils.InputUtils.isValidFormatFilter
 
 fun validateEventConfigInput(
     context: Context, typeFilter: String, formatFilter: String
@@ -16,7 +19,6 @@ fun validateEventConfigInput(
         !valueValid && !typeValid && !formatValid -> Pair(
             false, context.getString(R.string.invalid_input_configs)
         )
-
         !valueValid -> Pair(false, context.getString(R.string.invalid_value_filter))
         !typeValid -> Pair(false, context.getString(R.string.invalid_type_filter))
         !formatValid -> Pair(false, context.getString(R.string.invalid_format_filter))

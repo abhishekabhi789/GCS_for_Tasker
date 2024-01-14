@@ -4,12 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
-import com.abhi.gcsfortasker.chooseFromList
-import com.abhi.gcsfortasker.chooseVariable
 import com.abhi.gcsfortasker.databinding.ActionConfigInputBinding
-import com.abhi.gcsfortasker.getCodeFields
-import com.abhi.gcsfortasker.saveActionConfig
 import com.abhi.gcsfortasker.tasker.ActionInputFilter
+import com.abhi.gcsfortasker.utils.AppUtils.chooseFromList
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getCodeFields
+import com.abhi.gcsfortasker.utils.TaskerUtils.chooseVariable
+import com.abhi.gcsfortasker.utils.TaskerUtils.savePluginConfig
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 
@@ -43,12 +43,12 @@ class ActivityConfigScanAction : Activity(), TaskerPluginConfig<ActionInputFilte
         binding.chooseVariableButton.setOnClickListener { chooseVariable(this, taskerHelper) }
         binding.codeTypesList.text = getCodeFields(false).joinToString(",")
         binding.codeFormatsList.text = getCodeFields(true).joinToString(",")
-        binding.saveConfigButton.setOnClickListener { saveActionConfig(this, taskerHelper) }
+        binding.saveConfigButton.setOnClickListener { savePluginConfig(this, taskerHelper) }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            saveActionConfig(this, taskerHelper)
+            savePluginConfig(this, taskerHelper)
         }
         return super.onKeyDown(keyCode, event)
     }

@@ -5,11 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import com.abhi.gcsfortasker.R
-import com.abhi.gcsfortasker.chooseFromList
 import com.abhi.gcsfortasker.databinding.EventConfigInputBinding
-import com.abhi.gcsfortasker.getCodeFields
-import com.abhi.gcsfortasker.saveEventConfig
 import com.abhi.gcsfortasker.tasker.EventInputFilter
+import com.abhi.gcsfortasker.utils.AppUtils.chooseFromList
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getCodeFields
+import com.abhi.gcsfortasker.utils.TaskerUtils.savePluginConfig
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
 
@@ -54,7 +54,7 @@ class ActivityConfigScanEvent : Activity(), TaskerPluginConfig<EventInputFilter>
 
         }
         binding.saveConfigButton.setOnClickListener {
-            saveEventConfig(this, taskerHelper)
+            savePluginConfig(this, taskerHelper)
         }
         binding.chooseTypesButton.setOnClickListener {
             chooseFromList(this, false)
@@ -66,9 +66,8 @@ class ActivityConfigScanEvent : Activity(), TaskerPluginConfig<EventInputFilter>
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            saveEventConfig(this, taskerHelper)
+            savePluginConfig(this, taskerHelper)
         }
         return super.onKeyDown(keyCode, event)
     }
 }
-

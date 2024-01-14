@@ -1,6 +1,9 @@
 package com.abhi.gcsfortasker
 
 import android.app.Activity
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getCodeFields
+import com.abhi.gcsfortasker.utils.InputUtils.isValidFormatConfig
+import com.abhi.gcsfortasker.utils.InputUtils.isValidFormatFilter
 import com.google.android.material.textfield.TextInputLayout
 
 fun validateEventConfigInput(
@@ -18,13 +21,11 @@ fun validateEventConfigInput(
     val typeLayout = activity.findViewById<TextInputLayout>(R.id.type_filter_layout)
     val formatLayout = activity.findViewById<TextInputLayout>(R.id.format_filter_layout)
 
-    if (!valueValid) valueLayout.error =
-        activity.getString(R.string.value_not_valid_error) else valueLayout.error = null
-
-    if (!typeValid) typeLayout.error =
-        activity.getString(R.string.type_not_valid_error) else typeLayout.error = null
-    if (!formatValid) formatLayout.error =
-        activity.getString(R.string.format_not_valid_error) else formatLayout.error = null
+    valueLayout.error =
+        if (!valueValid) activity.getString(R.string.value_not_valid_error) else null
+    typeLayout.error = if (!typeValid) activity.getString(R.string.type_not_valid_error) else null
+    formatLayout.error =
+        if (!formatValid) activity.getString(R.string.format_not_valid_error) else null
 
     //return as a pair of error(Boolean) and error(reason)
     return when {
@@ -43,8 +44,8 @@ fun validateEventConfigInput(
 fun validateActionConfigInput(activity: Activity, formatFilter: String): Pair<Boolean, String> {
     val formatValid = isValidFormatConfig(formatFilter)
     val formatLayout = activity.findViewById<TextInputLayout>(R.id.format_filter_layout)
-    if (!formatValid) formatLayout.error =
-        activity.getString(R.string.format_not_valid_error) else formatLayout.error = null
+    formatLayout.error =
+        if (!formatValid) activity.getString(R.string.format_not_valid_error) else null
     return if (!formatValid) Pair(false, activity.getString(R.string.invalid_format_filter))
     else Pair(true, "")
 }

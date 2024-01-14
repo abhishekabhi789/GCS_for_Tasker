@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import com.abhi.gcsfortasker.utils.AppUtils.toToast
 
 class ShortCutActivity : Activity() {
     private val TAG = javaClass.simpleName

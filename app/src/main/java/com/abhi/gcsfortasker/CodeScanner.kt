@@ -9,7 +9,10 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 class CodeScanner {
     private val TAG = javaClass.simpleName
 
-    /** Performs scan and returns the scan result as a Pair of the scan result code and Barcode object or error message string */
+    /** Performs scan and returns the scan result as a Pair of the scan result code and Barcode object or error message string.
+     * @param context scanner needs it.
+     * @param customOptions [GmsBarcodeScannerOptions]
+     * @param callback will be called with [Pair] of [Int]-(error code) and [String]-(error string)*/
     fun scanNow(
         context: Context,
         customOptions: GmsBarcodeScannerOptions? = null,
@@ -48,7 +51,7 @@ class CodeScanner {
                 callback.invoke(Pair(error.code, e.message ?: error.message))
             }
     }
-
+/**Will sent to tasker as `%err` and `%errmsg`*/
     enum class ErrorCodes(
         val code: Int, val message: String
     ) {
@@ -57,5 +60,4 @@ class CodeScanner {
         SCAN_CANCELLED(3, "scan cancelled"),
         MISSING_PERMISSION_ALERT_WINDOW(4, "missing_permission: display over other apps.")
     }
-
 }

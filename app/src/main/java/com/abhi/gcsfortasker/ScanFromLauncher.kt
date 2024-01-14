@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import com.abhi.gcsfortasker.tasker.CodeOutput
 import com.abhi.gcsfortasker.tasker.event.ActivityConfigScanEvent
+import com.abhi.gcsfortasker.utils.AppUtils.toToast
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getNameOfTheField
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.joaomgcd.taskerpluginlibrary.extensions.requestQuery
 

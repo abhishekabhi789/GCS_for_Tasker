@@ -11,8 +11,8 @@ android {
         applicationId "com.abhi.gcsfortasker"
         minSdk 21
         targetSdk 33
-        versionCode 73
-        versionName "0.7.3"
+        versionCode 74
+        versionName "0.7.4"
     }
 
     buildTypes {
@@ -73,7 +73,7 @@ dependencies {
     //code scanner - unbundled
     implementation 'com.google.android.gms:play-services-code-scanner:16.1.0'
     //tasker plugin
-    implementation 'com.joaomgcd:taskerpluginlibrary:0.4.9'
+    implementation 'com.joaomgcd:taskerpluginlibrary:0.4.10'
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
@@ -81,9 +81,9 @@ dependencies {
     implementation "androidx.core:core-splashscreen:1.0.1"
     //for testing
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
     //material theming
-    materialImplementation 'com.google.android.material:material:1.10.0'
+    materialImplementation 'com.google.android.material:material:1.11.0'
     materialImplementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
 }

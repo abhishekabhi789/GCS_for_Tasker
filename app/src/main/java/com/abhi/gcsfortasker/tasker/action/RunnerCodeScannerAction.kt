@@ -8,10 +8,10 @@ import android.provider.Settings
 import android.util.Log
 import com.abhi.gcsfortasker.CodeScanner
 import com.abhi.gcsfortasker.ScannerService
-import com.abhi.gcsfortasker.getNameOfTheField
-import com.abhi.gcsfortasker.setBarcodeFormatsFromString
 import com.abhi.gcsfortasker.tasker.ActionInputFilter
 import com.abhi.gcsfortasker.tasker.CodeOutput
+import com.abhi.gcsfortasker.utils.BarcodeUtils.getNameOfTheField
+import com.abhi.gcsfortasker.utils.BarcodeUtils.setBarcodeFormatsFromString
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.joaomgcd.taskerpluginlibrary.action.TaskerPluginRunnerAction

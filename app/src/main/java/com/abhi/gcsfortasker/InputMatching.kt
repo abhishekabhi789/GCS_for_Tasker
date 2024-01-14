@@ -34,8 +34,3 @@ class InputMatching {
         return matches(Regex(rPattern))
     }
 }
-fun main(){
-    val string = "magically"
-    val pattern = "magic"
-    print(InputMatching().matchStrings(string,pattern,false))
-}
