@@ -13,7 +13,6 @@ import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultConditionUnsati
 
 class RunnerCodeScannerEvent :
     TaskerPluginRunnerConditionEvent<EventInputFilter, CodeOutput, CodeOutput>() {
-    private val TAG = javaClass.simpleName
     override fun getSatisfiedCondition(
         context: Context,
         input: TaskerInput<EventInputFilter>,
@@ -24,7 +23,6 @@ class RunnerCodeScannerEvent :
         val typeFilter = input.regular.typeFilter
         val formatFilter = input.regular.formatFilter
 
-
         Log.d(TAG, buildString {
             append("filterValues: ")
             append(valueFilter)
@@ -34,28 +32,22 @@ class RunnerCodeScannerEvent :
             append(formatFilter)
         })
         //if value filter is null, no rule for value filter, else match update data with value filter rule
-        val valueMatch = if (valueFilter == null) {
-            true
-        } else {
+        val valueMatch = if (valueFilter == null) true else {
             //check if the code value from event update matches the filter rules
-            InputMatching().matchStrings(
-                update?.rawValue.toString(),
-                valueFilter.toString(),
-                input.regular.useRegex
+            InputMatching.matchStrings(
+                input = update?.rawValue.toString(),
+                pattern = valueFilter.toString(),
+                useRegex = input.regular.useRegex
             )
         }
         //if type filter is null, no rule for type filter, else match update data with type filter rule
-        val typeMatch = if (typeFilter == null) {
-            true
-        } else {
+        val typeMatch = if (typeFilter == null) true else {
             //check if the code type from event update matches the type filter rule
-            val allTypes = typeFilter.split(",")
+            val allTypes = typeFilter.split(",").map { it.trim() }
             update?.codeType.toString() in allTypes
         }
-        val formatMatch = if (formatFilter == null) {
-            true
-        } else {
-            val allFormats = formatFilter.split(",")
+        val formatMatch = if (formatFilter == null) true else {
+            val allFormats = formatFilter.split(",").map { it.trim() }
             update?.codFormat.toString() in allFormats
         }
         Log.d(TAG, buildString {
@@ -74,9 +66,13 @@ class RunnerCodeScannerEvent :
             append(", format: ")
             append(update?.codFormat)
         })
-//trigger the event only if both value and type rules are matched
+        //trigger the event only if both value and type rules are matched
         return if (valueMatch && typeMatch && formatMatch) {
             TaskerPluginResultConditionSatisfied(context, update)
         } else TaskerPluginResultConditionUnsatisfied()
+    }
+
+    companion object {
+        private const val TAG = "RunnerCodeScannerEvent"
     }
 }

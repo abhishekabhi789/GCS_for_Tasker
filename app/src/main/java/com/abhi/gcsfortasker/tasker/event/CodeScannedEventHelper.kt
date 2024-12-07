@@ -20,6 +20,7 @@ class CodeScannedEventHelper(config: TaskerPluginConfig<EventInputFilter>) :
         input: TaskerInput<EventInputFilter>,
         blurbBuilder: StringBuilder
     ) {
-        blurbBuilder.append(context.getString(R.string.event_config_blurb_message))
+        blurbBuilder.appendLine()
+        blurbBuilder.appendLine(context.getString(R.string.event_config_blurb_message))
     }
 }

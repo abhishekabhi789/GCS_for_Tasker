@@ -5,22 +5,22 @@ plugins {
 
 android {
     namespace 'com.abhi.gcsfortasker'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.abhi.gcsfortasker"
         minSdk 21
-        targetSdk 33
-        versionCode 74
-        versionName "0.7.4"
+        targetSdk 35
+        versionCode 75
+        versionName "0.7.5"
     }
 
     buildTypes {
-         debug {
-             minifyEnabled true
-             shrinkResources true
-             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-         }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
             shrinkResources true
@@ -51,11 +51,9 @@ android {
     }
     sourceSets {
         classic {
-            java.srcDirs 'src/classic/java'
             res.srcDirs 'src/classic/res'
         }
         material {
-            java.srcDirs 'src/material/java'
             res.srcDirs 'src/material/res'
         }
     }
@@ -70,20 +68,19 @@ android {
 }
 
 dependencies {
-    //code scanner - unbundled
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    //code scanner
     implementation 'com.google.android.gms:play-services-code-scanner:16.1.0'
     //tasker plugin
     implementation 'com.joaomgcd:taskerpluginlibrary:0.4.10'
     //coroutine
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
     //splashscreen
     implementation "androidx.core:core-splashscreen:1.0.1"
     //for testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
     //material theming
-    materialImplementation 'com.google.android.material:material:1.11.0'
-    materialImplementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
+    materialImplementation 'com.google.android.material:material:1.12.0'
+    materialImplementation 'androidx.constraintlayout:constraintlayout:2.2.0'
 }

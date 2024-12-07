@@ -23,7 +23,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choose_formats_button"
-        style="@style/buttonStyle"
+        style="@style/iconButtonStyle"
         android:layout_marginHorizontal="4dp"
         android:contentDescription="@string/choose_format_button_description"
         app:icon="@drawable/ic_select"
@@ -33,7 +33,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choose_variable_button"
-        style="@style/buttonStyle"
+        style="@style/iconButtonStyle"
         android:contentDescription="@string/choose_variable_button_description"
         app:icon="@drawable/ic_variable"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,12 +61,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:text="@string/save_config_button_text"
-        android:textColor="?android:textColorPrimaryInverse"
         android:textSize="@dimen/main_text_size"
-        app:boxCornerRadiusBottomEnd="@dimen/boxCornerRadius"
-        app:boxCornerRadiusBottomStart="@dimen/boxCornerRadius"
-        app:boxCornerRadiusTopEnd="@dimen/boxCornerRadius"
-        app:boxCornerRadiusTopStart="@dimen/boxCornerRadius"
         app:icon="@drawable/ic_done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

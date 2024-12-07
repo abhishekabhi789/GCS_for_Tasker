@@ -1,7 +1,7 @@
 package com.abhi.gcsfortasker
 /**Won't be accurate, but follows the rules.
  * @see <a href=”https://tasker.joaoapps.com/userguide/en/matching”>Tasker Pattern Matching</a> */
-class InputMatching {
+object InputMatching {
     fun matchStrings(input: String, pattern: String, useRegex: Boolean): Boolean {
         return if (useRegex) {
             input.matches(Regex(pattern))

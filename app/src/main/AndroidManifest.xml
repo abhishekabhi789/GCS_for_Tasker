@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permission for plugin -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Permission to start scanner activity from background during action call-->
+    <uses-permission
+        android:name="android.permission.SYSTEM_ALERT_WINDOW"
+        android:minSdkVersion="29" />
+    <!-- Permission for showing scan service notification-->
+    <!-- notification permission won't be asked at runtime since it's not necessary
+    however if needed user can enable it from AppInfo settings -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Block installation on non camera devices-->
     <uses-feature
         android:name="android.hardware.camera"
@@ -13,19 +20,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SplashScreenTheme"
         tools:targetApi="33">
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode_ui" />
 
         <activity
-            android:name=".ScanFromLauncher"
+            android:name=".ScannerActivity"
             android:excludeFromRecents="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:noHistory="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,7 +41,7 @@
             android:name=".tasker.action.ActivityConfigScanAction"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="Scan Action"
+            android:label="@string/scan_action_config_title"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
@@ -47,16 +52,17 @@
             android:name=".tasker.event.ActivityConfigScanEvent"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="Scan Event"
+            android:label="@string/scan_event_config_title"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ShortCutActivity"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="com.abhi.gcsfortasker.ADD_SHORTCUT" />
             </intent-filter>
@@ -66,8 +72,8 @@
             android:name=".ScannerService"
             android:enabled="true"
             android:exported="false"
-            android:stopWithTask="true"
-            android:foregroundServiceType="shortService"/>
+            android:foregroundServiceType="shortService"
+            android:stopWithTask="true" />
 
     </application>
 

@@ -1,115 +1,92 @@
 package com.abhi.gcsfortasker
 
-import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.IconCompat
-import com.abhi.gcsfortasker.utils.AppUtils.toToast
+import com.abhi.gcsfortasker.utils.ShortcutUtils
+import com.abhi.gcsfortasker.utils.UiUtils.toToast
+import net.dinglisch.android.tasker.TaskerIntent
 
-class ShortCutActivity : Activity() {
-    private val TAG = javaClass.simpleName
+class ShortCutActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
+    private val shortcutLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let { handleShortcutInfo(it) }
+            } else {
+                Log.e(TAG, "onActivityResult: cancelled")
+                getString(R.string.no_shortcut_from_tasker).toToast(this)
+                finish()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            //the default shortcut launches this activity.
+            //upon launching, the activity asks tasker to let user choose a task as shortcut.
             getShortCutFromTasker()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.N_MR1)
-    private fun updateShortcut(
-        context: Context,
-        intent: Intent,
-        icon: IconCompat,
-        shortLabel: String,
-        longLabel: String
-    ) {
-        val shortcutInfo = ShortcutInfoCompat.Builder(context, SHORTCUT_ID)
-            .setIntent(intent)
-            .setShortLabel(shortLabel)
-            .setLongLabel(longLabel)
-            .setIcon(icon)
-            .build()
-
-        val shortcutInfoList = mutableListOf(shortcutInfo)
-        ShortcutManagerCompat.addDynamicShortcuts(context, shortcutInfoList)
-        Log.d(TAG, "updateShortcut: updated")
-    }
-/**Creates the initial shortcut, which gets task shortcut.*/
-    @RequiresApi(Build.VERSION_CODES.N_MR1)
-    fun createShortcut(context: Context) {
-        if (!isShortcutAdded(context)) {
-            val intent =
-                Intent(SHORTCUT_ACTIVITY_INTENT, null, context, ShortCutActivity::class.java)
-            val icon = IconCompat.createWithResource(context, R.drawable.ic_select)
-            val shortLabel = context.getString(R.string.initial_shortcut_short_label)
-            val longLabel = context.getString(R.string.initial_shortcut_long_label)
-            updateShortcut(context, intent, icon, shortLabel, longLabel)
-        }
-    }
-
-    private fun isShortcutAdded(context: Context): Boolean {
-        val shortcuts = ShortcutManagerCompat.getDynamicShortcuts(context)
-        for (shortcut in shortcuts) {
-            if (shortcut.id == SHORTCUT_ID) return true
-        }
-        return false
-    }
-
     private fun getShortCutFromTasker() {
-        val componentName = ComponentName(TASKER_PACKAGE_NAME, TASKER_SHORTCUT_ACTIVITY_NAME)
         val intent = Intent(Intent.ACTION_CREATE_SHORTCUT)
-        intent.component = componentName
-        startActivityForResult(intent, CREATE_SHORTCUT_REQUEST_CODE)
-        Log.d(TAG, "getShortCutFromTasker: waiting for results")
+        intent.component = ComponentName(TASKER_PACKAGE_NAME, TASKER_SHORTCUT_ACTIVITY_NAME)
+        shortcutLauncher.launch(intent)
+        Log.i(TAG, "getShortCutFromTasker: waiting for results")
     }
 
-    @Suppress("DEPRECATION")
     @RequiresApi(Build.VERSION_CODES.N_MR1)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_SHORTCUT_REQUEST_CODE && resultCode == RESULT_OK) {
-            try {
-                val uri =
-                    if (data?.extras != null && data.extras!!.containsKey(Intent.EXTRA_SHORTCUT_INTENT)) {
-                        val shortcutIntent =
-                            data.extras!!.get(Intent.EXTRA_SHORTCUT_INTENT) as Intent
-                        shortcutIntent.toUri(Intent.URI_INTENT_SCHEME)
-                    } else {
-                        data?.toUri(Intent.URI_INTENT_SCHEME) ?: return
-                    }
-                val shortcutName = data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME)!!
-                val icon = data.getParcelableExtra<Bitmap>(Intent.EXTRA_SHORTCUT_ICON)
-                val shortcutIcon = IconCompat.createWithBitmap(icon!!)
-                val intent = Intent.parseUri(uri, 0)
-                Log.d(TAG, "onActivityResult: name $shortcutName")
-                Log.d(TAG, "onActivityResult: uri $uri")
-                updateShortcut(applicationContext, intent, shortcutIcon, shortcutName, shortcutName)
-            } catch (e: Exception) {
-                Log.e(TAG, "onActivityResult: ${e.message}")
-            } finally {
-                finish()
+    private fun handleShortcutInfo(data: Intent) {
+        try {
+            val shortcutIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT, Intent::class.java)
+            else data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT)
+
+            val uri = shortcutIntent?.toUri(Intent.URI_INTENT_SCHEME)
+                ?: data.toUri(Intent.URI_INTENT_SCHEME)
+
+            val shortcutName = data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME)!!
+
+            val icon = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap::class.java)
+            else data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON)
+            val shortcutIcon = IconCompat.createWithBitmap(icon!!)
+
+            val intent = Intent.parseUri(uri, 0)
+
+            Log.i(TAG, "onActivityResult: name $shortcutName")
+            Log.d(TAG, "onActivityResult: uri $uri")
+
+            ShortcutUtils.updateShortcut(
+                context = this,
+                intent = intent,
+                icon = shortcutIcon,
+                shortLabel = shortcutName,
+                longLabel = shortcutName
+            ).also { isShortcutAdded ->
+                Log.i(TAG, "onActivityResult: shortcut added for $shortcutName")
+                if (isShortcutAdded)
+                    getString(R.string.shortcut_added_for_task_name, shortcutName).toToast(this)
             }
-        } else if (requestCode == CREATE_SHORTCUT_REQUEST_CODE && resultCode == RESULT_CANCELED) {
-            Log.e(TAG, "onActivityResult: cancelled")
-            getString(R.string.no_shortcut_from_tasker).toToast(this)
+        } catch (e: Exception) {
+            Log.e(TAG, "onActivityResult: failed to retrieve task shortcut info ${e.message}")
+        } finally {
             finish()
         }
     }
 
     companion object {
-        private const val SHORTCUT_ID = "dynamic_shortcut_1"
-        private const val CREATE_SHORTCUT_REQUEST_CODE = 789
-        private const val SHORTCUT_ACTIVITY_INTENT = "com.abhi.gcsfortasker.ADD_SHORTCUT"
-        private const val TASKER_PACKAGE_NAME = "net.dinglisch.android.taskerm"
+        private const val TAG = "ShortCutActivity"
+        private const val TASKER_PACKAGE_NAME = TaskerIntent.TASKER_PACKAGE_MARKET
         private const val TASKER_SHORTCUT_ACTIVITY_NAME =
             "$TASKER_PACKAGE_NAME.TaskerAppWidgetConfigureShortcut"
     }

@@ -1,12 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.Material3.DayNight">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow_light</item>
-        <item name="colorPrimaryVariant">@color/yellow_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Customize your theme here. -->
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-    </style>
+    <style name="AppTheme" parent="Theme.Material3.DynamicColors.Light" />
 </resources>

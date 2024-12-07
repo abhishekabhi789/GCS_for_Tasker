@@ -1,55 +1,61 @@
 <resources>
     <string name="app_name" translatable="false">GCS for Tasker</string>
+    <!--    Input configs-->
+    <string name="value_filter">Value filter</string>
+    <string name="type_filter">Type filter</string>
+    <string name="use_regex">Use regex matching for value filter</string>
+    <string name="format_filter">Format filter</string>
+    <string name="enable_auto_zoom">Enable auto zoom</string>
+    <string name="allow_manual_input">Allow manual input</string>
     <!--    Output variables-->
-    <string name="io_out_raw_value_label">Raw Value</string>
-    <string name="io_out_raw_value_description">Raw code data scanned</string>
-    <string name="io_out_code_type_label">Code Type</string>
-    <string name="io_out_code_type_description">Type of the code</string>
-    <string name="io_out_display_value_label">Display Value</string>
-    <string name="io_out_display_value_description">Code data in readable form</string>
-    <string name="io_out_code_format_label">Code Format</string>
-    <string name="io_out_code_format_description">Encoding format of the code</string>
-    <!--    Filter input error messages when user gives invalid input-->
-    <string name="invalid_type_filter">Invalid type filter</string>
-    <string name="invalid_value_filter">Invalid value filter</string>
-    <string name="invalid_format_filter">Invalid format filter</string>
-    <string name="invalid_input_configs">Invalid input configs</string>
-    <!--    Event Config Activity-->
+    <string name="variable_raw_value_label">Raw Value</string>
+    <string name="variable_raw_value_description">Raw code data scanned</string>
+    <string name="variable_code_type_label">Code Type</string>
+    <string name="variable_code_type_description">Type of the code</string>
+    <string name="variable_display_value_label">Display Value</string>
+    <string name="variable_display_value_description">Code data in readable form</string>
+    <string name="variable_code_format_label">Code Format</string>
+    <string name="variable_code_format_description">Encoding format of the code</string>
     <!--    Text input fields-->
-    <string name="value_filter_helper_text">Use simple match or regex rules</string>
-    <string name="value_filter_hint">Enter value filter</string>
-    <string name="type_filter_helper_text">Enter comma separated types</string>
-    <string name="type_filter_hint">Enter type filter</string>
-    <string name="format_filter_helper_text">Enter comma separated formats</string>
-    <string name="format_filter_hint">Enter format filter</string>
+    <string name="value_filter_helper_text">Use simple matches or regex</string>
+    <string name="value_filter_hint">Enter Value filter</string>
+    <string name="type_filter_helper_text">Select code types to process</string>
+    <string name="type_filter_hint">Type filters</string>
+    <string name="format_filter_helper_text">Select code formats to process</string>
+    <string name="format_filter_hint">Format filters</string>
+
     <!--    Text input error messages-->
-    <string name="value_not_valid_error">Enter valid match pattern or regex</string>
-    <string name="type_not_valid_error">Enter correct type values, use the search button for help</string>
-    <string name="format_not_valid_error">Enter correct format values, use the search button for help</string>
+    <string name="type_not_valid_error">Enter correct type values</string>
+    <string name="format_not_valid_error">Enter correct format values</string>
     <!--    Regex switch status-->
     <string name="switch_text_off">Simple</string>
     <string name="switch_text_on">Regex</string>
     <!--    Description for buttons-->
-    <string name="choose_type_button_description">Choose code type button</string>
     <string name="choose_format_button_description">Choose code format button</string>
     <string name="choose_variable_button_description">Choose variable button</string>
-    <!--    Choose variable dialog-->
+    <!--    Dialogs-->
     <string name="choose_a_variable">Choose a variable</string>
     <string name="choose_code_type_dialog_title">Choose code types</string>
     <string name="choose_code_format_dialog_title">Choose code formats</string>
-    <string name="clear_all">Clear All</string>
+    <string name="toggle_all">Toggle All</string>
     <!--    Save configuration-->
     <string name="save_config_button_text">Save</string>
-    <string name="configuration_saved">Configuration Saved.</string>
     <!--    Shortcuts-->
     <string name="initial_shortcut_short_label">Add a task shortcut</string>
     <string name="initial_shortcut_long_label">You can add a related tasker task here</string>
-    <string name="no_shortcut_from_tasker">No shortcut received from Tasker!</string>
+    <string name="no_shortcut_from_tasker">Failed to get shortcuts, try closing tasker with back button</string>
+    <string name="initial_shortcut_added_toast">Shortcut initialized.</string>
+    <string name="shortcut_added_for_task_name">Shortcut added for %1$s</string>
+    <!--    Scanner service-->
+    <string name="notification_scanning_service_title">Scanning is in action</string>
+    <string name="notification_scanning_service_content_text">You can hide this notification if possible</string>
+    <string name="notification_scanning_service_channel_name">Scanner service notification</string>
     <!--    Other strings-->
     <string name="code_types_list_title">These are the code types</string>
     <string name="code_formats_list_title">These are the code formats</string>
-    <string name="enable_auto_zoom">Enable auto zoom</string>
-    <string name="allow_manual_input">Allow manual input</string>
     <string name="no_variable_to_show">No variable to show!</string>
-    <string name="event_config_blurb_message">\nEvent will trigger upon successful scan from launcher shortcut.</string>
+    <string name="event_config_blurb_message">Event will trigger upon successful scan from launcher shortcut.</string>
+    <string name="scan_action_config_title">Scan Action</string>
+    <string name="scan_event_config_title">Scan Event</string>
+    <string name="permission_missing_toast_draw_overlay">Draw overlay permission is needed.</string>
 </resources>

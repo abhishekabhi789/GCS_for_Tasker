@@ -24,16 +24,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:inputType">textMultiLine</item>
-        <item name="android:lines">10</item>
-        <item name="android:minLines">1</item>
-        <item name="android:maxLines">3</item>
+        <item name="singleLine">false</item>
         <item name="android:textSize">@dimen/main_text_size</item>
     </style>
 
     <style name="textViewStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
     <style name="switchStyle" parent="Widget.Material3.CompoundButton.MaterialSwitch">
@@ -45,10 +42,12 @@
         <item name="android:textSize">@dimen/main_text_size</item>
     </style>
 
-    <style name="buttonStyle" parent="Widget.Material3.Button.ElevatedButton.Icon">
+    <style name="buttonStyle" parent="Widget.Material3.Button.TonalButton.Icon">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:backgroundTint">@color/yellow</item>
-        <item name="iconTint">?android:textColorPrimaryInverse</item>
+    </style>
+    <style name="iconButtonStyle" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
     </style>
 </resources>

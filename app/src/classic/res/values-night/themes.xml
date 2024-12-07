@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="AppTheme" parent="android:Theme.DeviceDefault.DayNight" tools:ignore="NewApi">
-        <!-- controls the switch on colour -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="android:colorPrimary">@color/yellow</item>
         <item name="android:colorPrimaryDark">@color/yellow_dark</item>
-        <item name="android:colorAccent">@color/yellow</item>
+        <item name="android:colorAccent">@color/grey</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:statusBarColor">@color/yellow</item>
-        <item name="android:editTextBackground">@color/black_alt</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowNoTitle">false</item>
     </style>
 </resources>

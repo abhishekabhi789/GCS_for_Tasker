@@ -13,9 +13,11 @@
         style="@style/textInputLayoutStyle"
         android:hint="@string/value_filter_hint"
         app:helperText="@string/value_filter_helper_text"
+        android:paddingEnd="4dp"
         app:layout_constraintEnd_toStartOf="@id/use_regex_switch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/value_filter"
@@ -40,50 +42,46 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/type_filter_layout"
         style="@style/textInputLayoutStyle"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="@string/type_filter_hint"
         app:helperText="@string/type_filter_helper_text"
-        app:layout_constraintEnd_toEndOf="@id/value_filter_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/value_filter_layout"
-        app:layout_constraintTop_toBottomOf="@id/value_filter_layout">
+        app:layout_constraintTop_toBottomOf="@id/value_filter_layout"
+        tools:ignore="KeyboardInaccessibleWidget">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/type_filter"
-           style="@style/editTextStyle" />
+            style="@style/editTextStyle"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/choose_types_button"
-        style="@style/buttonStyle"
-        android:contentDescription="@string/choose_type_button_description"
-        app:icon="@drawable/ic_select"
-        app:layout_constraintBottom_toBottomOf="@id/type_filter_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/type_filter_layout"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/format_filter_layout"
         style="@style/textInputLayoutStyle"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="@string/format_filter_hint"
         app:helperText="@string/format_filter_helper_text"
-        app:layout_constraintEnd_toEndOf="@id/type_filter_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/type_filter_layout"
-        app:layout_constraintTop_toBottomOf="@id/type_filter_layout">
+        app:layout_constraintTop_toBottomOf="@id/type_filter_layout"
+        tools:ignore="KeyboardInaccessibleWidget">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/format_filter"
-           style="@style/editTextStyle" />
+            style="@style/editTextStyle"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/choose_formats_button"
-        style="@style/buttonStyle"
-        android:contentDescription="@string/choose_type_button_description"
-        app:icon="@drawable/ic_select"
-        app:layout_constraintBottom_toBottomOf="@id/format_filter_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/format_filter_layout"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_config_button"
@@ -92,12 +90,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:text="@string/save_config_button_text"
-        android:textColor="?android:textColorPrimaryInverse"
         android:textSize="@dimen/main_text_size"
-        app:boxCornerRadiusBottomEnd="@dimen/boxCornerRadius"
-        app:boxCornerRadiusBottomStart="@dimen/boxCornerRadius"
-        app:boxCornerRadiusTopEnd="@dimen/boxCornerRadius"
-        app:boxCornerRadiusTopStart="@dimen/boxCornerRadius"
         app:icon="@drawable/ic_done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,62 +2,82 @@ package com.abhi.gcsfortasker
 
 import android.content.Context
 import android.util.Log
+import com.abhi.gcsfortasker.tasker.CodeOutput
+import com.abhi.gcsfortasker.utils.BarcodeFieldUtils
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResult
+import com.joaomgcd.taskerpluginlibrary.runner.TaskerPluginResultErrorWithOutput
 
 /** Call scanNow() to start scanning */
-class CodeScanner {
-    private val TAG = javaClass.simpleName
+object CodeScanner {
+    private const val TAG = "CodeScanner"
 
-    /** Performs scan and returns the scan result as a Pair of the scan result code and Barcode object or error message string.
-     * @param context scanner needs it.
-     * @param customOptions [GmsBarcodeScannerOptions]
-     * @param callback will be called with [Pair] of [Int]-(error code) and [String]-(error string)*/
+    /** Performs scan by launching GCS, results are returned through callbacks].*/
     fun scanNow(
         context: Context,
-        customOptions: GmsBarcodeScannerOptions? = null,
-        callback: (Pair<Int, Any>) -> Unit
+        scannerOptions: GmsBarcodeScannerOptions? = null,
+        onSuccess: (Barcode) -> Unit,
+        onFail: (Failure) -> Unit
     ) {
-        val options = customOptions ?: GmsBarcodeScannerOptions.Builder().enableAutoZoom().build()
+        val options = scannerOptions ?: GmsBarcodeScannerOptions.Builder().enableAutoZoom().build()
         val scanner = GmsBarcodeScanning.getClient(context, options)
         scanner.startScan()
             .addOnSuccessListener { qrCode ->
                 Log.d(TAG, buildString {
-                    append("scanNow: Success- value: ")
-                    append(qrCode.rawValue)
-                    append(", type: ")
-                    append(qrCode.valueType)
-                    append(", format: ")
-                    append(qrCode.format)
+                    append("scanNow: Success- value: ", qrCode.rawValue)
+                    append(", type: ", qrCode.valueType)
+                    append(", format: ", qrCode.format)
                 })
-                callback.invoke(Pair(0, qrCode))
+                onSuccess(qrCode)
             }
             .addOnCanceledListener {
                 Log.d(TAG, "scanNow: Scan Cancelled")
-                val error = ErrorCodes.SCAN_CANCELLED
-                callback.invoke(Pair(error.code, error.message))
+                onFail(Failure.SCAN_CANCELLED)
             }
             .addOnFailureListener { e ->
-                Log.e(
-                    TAG,
-                    buildString {
-                        append("scanNow: failed to scan. ")
-                        append("message: ${e.message}")
-                        append(", cause: ${e.cause}")
-                        append(", stacktrace: ${e.stackTraceToString()}")
-                    }
-                )
-                val error = ErrorCodes.ERROR
-                callback.invoke(Pair(error.code, e.message ?: error.message))
+                Log.e(TAG, "scanNow: failed to scan", e)
+                onFail(Failure.ERROR.apply { extraInfo = e.message })
             }
     }
-/**Will sent to tasker as `%err` and `%errmsg`*/
-    enum class ErrorCodes(
-        val code: Int, val message: String
+
+    /**call this method from [GmsBarcodeScannerOptions.Builder] scope to set barcode formats*/
+    fun GmsBarcodeScannerOptions.Builder.setBarcodeFormatsFromFilter(formatFilter: String) {
+        val formatNames = formatFilter.split(",").map { it.trim() }
+        val formats = formatNames.mapNotNull { name ->
+            BarcodeFieldUtils.getValueForField(name, BarcodeFieldUtils.Field.FORMAT)
+        }
+        when {
+            formats.isEmpty() -> return
+            formats.size == 1 -> this.setBarcodeFormats(formats.first())
+            else -> {
+                //if user selected All formats along with any others, ignore other formats and detect all codes
+                if (formats.contains(Barcode.FORMAT_ALL_FORMATS)) this.setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
+                else this.setBarcodeFormats(formats.first(), *formats.drop(1).toIntArray())
+            }
+        }
+    }
+
+    /**Error code and error messages for a failure. Can be sent to tasker as `%err` and `%errmsg`*/
+    enum class Failure(
+        private val code: Int,
+        private val message: String,
+        var extraInfo: String? = null
     ) {
-        ERROR(1, "unknown error"),
+        ERROR(1, "error"),
         TIMEOUT(2, "timeout error"),
         SCAN_CANCELLED(3, "scan cancelled"),
-        MISSING_PERMISSION_ALERT_WINDOW(4, "missing_permission: display over other apps.")
+        MISSING_PERMISSION_ALERT_WINDOW(4, "missing_permission: display over other apps.");
+
+        /** Returns the message as string with extra info if any*/
+        fun getErrorMessage(): String {
+            return listOfNotNull(this.message, this.extraInfo).joinToString(" ")
+        }
+
+        /** Returns the [Failure] code and message as [TaskerPluginResult]*/
+        fun asTaskerErrorOutput(): TaskerPluginResult<CodeOutput> {
+            return TaskerPluginResultErrorWithOutput(this.code, getErrorMessage())
+        }
     }
 }

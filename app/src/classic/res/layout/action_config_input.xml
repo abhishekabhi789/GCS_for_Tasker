@@ -4,25 +4,30 @@
     android:id="@+id/action_config_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/format_filter_title"
         style="@style/textViewStyle"
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
         android:text="@string/format_filter_helper_text" />
 
     <EditText
         android:id="@+id/format_filter"
         style="@style/textInputStyle"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:layout_marginBottom="12dp"
         android:layout_weight="0"
         android:hint="@string/format_filter_hint"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        tools:ignore="InefficientWeight" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/layout_margin"
         android:gravity="end">
 
         <ImageButton
@@ -31,6 +36,10 @@
             android:contentDescription="@string/choose_format_button_description"
             android:src="@drawable/ic_select" />
 
+        <Space
+            android:layout_width="4dp"
+            android:layout_height="match_parent" />
+
         <ImageButton
             android:id="@+id/choose_variable_button"
             style="@style/imageButtonStyle"
@@ -38,29 +47,22 @@
             android:src="@drawable/ic_variable" />
     </LinearLayout>
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/allow_auto_zoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/switchStyle"
         android:layout_gravity="end"
-        android:paddingVertical="8dp"
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:layout_marginVertical="8dp"
         android:text="@string/enable_auto_zoom"
-        android:thumbTint="@color/yellow"
-        android:trackTint="@color/yellow_light"
-        tools:checked="false"
-        tools:targetApi="m" />
+        tools:checked="false" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/allow_manual_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/switchStyle"
         android:layout_gravity="end"
-        android:paddingVertical="8dp"
+        android:layout_marginHorizontal="@dimen/layout_margin"
         android:text="@string/allow_manual_input"
-        android:thumbTint="@color/yellow"
-        android:trackTint="@color/yellow_light"
-        tools:checked="false"
-        tools:targetApi="m" />
+        tools:checked="false" />
 
     <Button
         android:id="@+id/save_config_button"
@@ -70,26 +72,32 @@
         android:text="@string/save_config_button_text" />
 
     <TextView
-        android:id="@+id/code_types_list_title"
         style="@style/textViewStyle"
-        android:text="@string/code_types_list_title" />
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:text="@string/code_types_list_title"
+        android:textColor="?android:textColorHint" />
 
     <TextView
         android:id="@+id/code_types_list"
         style="@style/textViewStyle"
-        android:lines="3"
-        android:textColor="?android:textColor"
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:background="@drawable/text_field_background"
+        android:fontFamily="monospace"
+        android:padding="8dp"
         android:textIsSelectable="true" />
 
     <TextView
-        android:id="@+id/code_formats_list_title"
         style="@style/textViewStyle"
-        android:text="@string/code_formats_list_title" />
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:text="@string/code_formats_list_title"
+        android:textColor="?android:textColorHint" />
 
     <TextView
         android:id="@+id/code_formats_list"
         style="@style/textViewStyle"
-        android:lines="3"
-        android:textColor="?android:textColor"
+        android:layout_marginHorizontal="@dimen/layout_margin"
+        android:background="@drawable/text_field_background"
+        android:fontFamily="monospace"
+        android:padding="8dp"
         android:textIsSelectable="true" />
 </LinearLayout>

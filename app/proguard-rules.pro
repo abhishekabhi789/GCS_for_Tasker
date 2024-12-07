@@ -23,6 +23,5 @@
 -dontobfuscate
 #-keep class com.abhi.gcsfortasker.** { *; }
 #-keep class com.joaomgcd.taskerpluginlibrary.** { *; }
-#Barcode is accessed via reflection. see utils.kt
+# Barcode is accessed via reflection on BarcodeFieldUtils
 -keep class com.google.mlkit.vision.barcode.common.Barcode { *; }
-

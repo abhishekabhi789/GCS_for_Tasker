@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="textInputStyle" parent="@android:style/Widget.EditText">
+    <style name="textInputStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:ems">10</item>
+        <item name="android:background">@drawable/text_field_background</item>
         <item name="android:fontFamily">monospace</item>
+        <item name="android:padding">16dp</item>
         <item name="android:importantForAutofill" tools:targetApi="o">no</item>
         <item name="android:inputType">textMultiLine</item>
-        <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
     </style>
 
-    <style name="imageButtonStyle" parent="@android:style/Widget.ImageButton">
+    <style name="imageButtonStyle" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/yellow</item>
+        <item name="android:tint">?android:colorBackground</item>
+        <item name="android:background">@drawable/round_bg</item>
+        <item name="android:padding">8dp</item>
         <item name="android:layout_marginHorizontal" tools:targetApi="o">8dp</item>
-        <item name="android:tint">?android:textColorPrimaryInverse</item>
     </style>
 
-    <style name="buttonStyle" parent="@android:style/Widget.Button">
+    <style name="buttonStyle" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:textColor">?android:colorBackground</item>
         <item name="android:layout_margin">32dp</item>
-        <item name="android:backgroundTint">@color/yellow</item>
-        <item name="android:textColor">?android:textColorPrimaryInverse</item>
     </style>
 
-    <style name="textViewStyle" parent="@android:style/Widget.TextView">
+    <style name="textViewStyle" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
+    </style>
+
+    <style name="switchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="thumbTint">@color/yellow</item>
+        <item name="trackTint">@color/yellow_light</item>
+        <item name="android:padding">4dp</item>
     </style>
 </resources>
